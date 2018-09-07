@@ -15,6 +15,7 @@ public class Munje {
 			   "Image\\gameImage\\½Å¹Î¾Æ.PNG"};
 	   
 	   String[] dap={
+			   "",
 			   "Image\\gameImage\\±è´Ù¹Ì.jpg",
 			   "Image\\gameImage\\µð¿À.PNG",
 			   "Image\\gameImage\\¸ð¸ð.jpg",

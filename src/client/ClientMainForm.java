@@ -1,9 +1,12 @@
 package client;
 
 import java.awt.CardLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JFrame;
 
-public class ClientMainForm extends JFrame{
+public class ClientMainForm extends JFrame implements ActionListener{
 	CardLayout card = new CardLayout();
 	MainView mv = new MainView();  //로그인창 생성
 	WaitRoom wr = new WaitRoom();  //대기창 생성
@@ -30,20 +33,16 @@ public class ClientMainForm extends JFrame{
 		new ClientMainForm();
 	}
 
-	//쓰레드
-	/*@Override
-    public void run() {
-        for(int i=0; i<=100; i++)
-        {
-        
-            value++;
-            try {
-                Thread.sleep(10);
-                progress.setValue(i);
-            } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
-    }*/
+	@Override
+	   public void actionPerformed(ActionEvent e) {
+	      // TODO Auto-generated method stub
+	      if(e.getSource()==gr.tf1)
+	      {
+	         String s = gr.tf1.getText();
+	         gr.tf1.setText("");
+	      }
+	      
+	      
+	      
+	   }
 }
