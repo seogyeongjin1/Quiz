@@ -184,10 +184,11 @@ public class GameRoom extends JPanel implements Runnable{
       pb1 = new JProgressBar();
       pb1.setMaximum(100);
       pb1.setMinimum(0);
-      pb1.setForeground(Color.YELLOW);
+      pb1.setForeground(Color.ORANGE);
       pb1.setBackground(Color.WHITE);
       pb1.setStringPainted(true);
       pb1.setBounds(444,700, 701, 25);
+      pb1.setFont(new Font("ÈÞ¸Õ¸ÅÁ÷Ã¼", Font.BOLD, 20));
       //pb1.setValue(value);
       add(pb1);
       
@@ -250,7 +251,7 @@ public class GameRoom extends JPanel implements Runnable{
 			pb1.setValue(a);
 			try
 			{
-				Thread.sleep(100);
+				Thread.sleep(50);
 			}catch(Exception ex) {}
 			if(a==100)
 			{
