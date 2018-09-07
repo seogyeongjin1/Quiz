@@ -9,7 +9,7 @@ public class ClientMainForm extends JFrame{
 	WaitRoom wr = new WaitRoom();  //대기창 생성
 	GameRoom gr = new GameRoom();  //게임룸 생성
 	public ClientMainForm()
-	{
+	{                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
 		 setLayout(card);
 		 
 		 add("GR",gr);
