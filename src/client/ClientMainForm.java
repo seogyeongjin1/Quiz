@@ -41,8 +41,5 @@ public class ClientMainForm extends JFrame implements ActionListener{
 	         String s = gr.tf1.getText();
 	         gr.tf1.setText("");
 	      }
-	      
-	      
-	      
 	   }
 }
