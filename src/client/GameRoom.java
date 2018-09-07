@@ -245,7 +245,7 @@ public class GameRoom extends JPanel implements Runnable{
          g.drawImage(munje, 445, 200, 700, 490, this);
       }
 
-
+    //그림교체 화면
     public void setImage(int i)
     {
     	munje=Toolkit.getDefaultToolkit().getImage(image[i]);
@@ -265,18 +265,19 @@ public class GameRoom extends JPanel implements Runnable{
 			}catch(Exception ex) {}
 			if(a==100)
 			{
+				
+				
+				if(i<10)
+				{
+					//정답 그림 변경
+				    setImage(i);
+				}
+				a=0;
+				i++;
 				if(i==10)
 				{
 					// 서버 점수 전송 
 					break;
-				}
-				a=0;
-				i++;
-				if(i>10)
-				{
-					i=0;
-					//정답 그림 변경
-				    setImage(i);
 				}
 				
 				
