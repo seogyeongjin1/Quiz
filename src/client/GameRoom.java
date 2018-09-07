@@ -84,7 +84,7 @@ public class GameRoom extends JPanel{
       po5=new JLabel(new ImageIcon("Image\\po5.png"));
       po5.setOpaque(true);
       po5.setBackground(Color.black);
-      
+      gp = new JPanel();
       
       tf1=new JTextField();
       tf2=new JTextField();
@@ -96,7 +96,6 @@ public class GameRoom extends JPanel{
       JScrollPane js=new JScrollPane(ta);
       tf=new JTextField();
       
-      gp=new JPanel();
       
       
       // ¹èÄ¡
