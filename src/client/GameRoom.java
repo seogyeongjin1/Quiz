@@ -5,18 +5,41 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.table.*;
-public class GameRoom extends JPanel{
+public class GameRoom extends JPanel implements Runnable{
    JProgressBar pb1;
    JButton b1,b2,b3;
-   JLabel la1,la2,la3,la4,la5,la6,la7,la8,la9,la10,la11,la12,la13,la14,la15,po1,po2,po3,po4,po5;
+   JLabel la1,la2,la3,la4,la5,la6,la7,la8,la9,la10,la11,la12,la13,la14,la15,po1,po2,po3,po4,po5,score;
    JTextField tf1,tf2,tf3,tf4,tf5;
    JTextArea ta;
    JTextField tf;
    JPanel gp;
-   Image back;
+   Image back,munje;
+   String[] image={
+		   "Image\\gameImage\\김다미.jpg",
+		   "Image\\gameImage\\디오.PNG",
+		   "Image\\gameImage\\모모.jpg",
+		   "Image\\gameImage\\박서준.jpg",
+		   "Image\\gameImage\\박진주.PNG",
+		   "Image\\gameImage\\버논.jpg",
+		   "Image\\gameImage\\승리.jpg",
+		   "Image\\gameImage\\설리.PNG",
+		   "Image\\gameImage\\송중기.jpg",
+		   "Image\\gameImage\\신민아.PNG"};
+   String[] dap={
+		   "Image\\gameImage\\김다미.jpg",
+		   "Image\\gameImage\\디오.PNG",
+		   "Image\\gameImage\\모모.jpg",
+		   "Image\\gameImage\\박서준.jpg",
+		   "Image\\gameImage\\박진주.PNG",
+		   "Image\\gameImage\\버논.jpg",
+		   "Image\\gameImage\\승리.jpg",
+		   "Image\\gameImage\\설리.PNG",
+		   "Image\\gameImage\\송중기.jpg",
+		   "Image\\gameImage\\신민아.PNG"};
    GameRoom()
    {
       back=Toolkit.getDefaultToolkit().getImage("Image\\3.jpg");
+      munje=Toolkit.getDefaultToolkit().getImage(image[0]);
       // 초기값
          b1=new JButton(new ImageIcon("Image\\ready.png"));
          b2=new JButton(new ImageIcon("Image\\start.png"));
@@ -170,6 +193,11 @@ public class GameRoom extends JPanel{
       
       //게임 프로그래스바
       pb1 = new JProgressBar();
+      pb1.setMaximum(100);
+      pb1.setMinimum(0);
+      pb1.setForeground(Color.PINK);
+      pb1.setBackground(Color.WHITE);
+      pb1.setStringPainted(true);
       pb1.setBounds(444,700, 701, 25);
       //pb1.setValue(value);
       add(pb1);
@@ -192,15 +220,16 @@ public class GameRoom extends JPanel{
       add(p);
       
       //문제 창
-      gp.setBounds(445, 200, 700, 490);
-      gp.setOpaque(true);
-      add(gp);
+      //gp.setBounds(445, 200, 700, 490);
+      //gp.setOpaque(true);
+      //add(gp);
       
       // 윈도우 크기 결정
       setSize(1600, 900);
       setVisible(true);
       
       //setDefaultCloseOperation(EXIT_ON_CLOSE); // 프로그램 종료
+      new Thread(this).start();
    }
    
 
@@ -213,7 +242,49 @@ public class GameRoom extends JPanel{
    // 스킨입힐때
       protected void paintComponent(Graphics g) {
          g.drawImage(back, 0, 0, getWidth(),getHeight(),this);
+         g.drawImage(munje, 445, 200, 700, 490, this);
       }
+
+
+    public void setImage(int i)
+    {
+    	munje=Toolkit.getDefaultToolkit().getImage(image[i]);
+    	repaint();
+    }
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		int a=0;
+		int i=0;
+		while(true)
+		{
+			pb1.setValue(a);
+			try
+			{
+				Thread.sleep(5);
+			}catch(Exception ex) {}
+			if(a==100)
+			{
+				if(i==10)
+				{
+					// 서버 점수 전송 
+					break;
+				}
+				a=0;
+				i++;
+				if(i>10)
+				{
+					i=0;
+					//정답 그림 변경
+				    setImage(i);
+				}
+				
+				
+			}
+			a++;
+			
+		}
+	}
 }
       
       
