@@ -108,6 +108,12 @@ public class GameRoom extends JPanel implements Runnable{
       po5=new JLabel(new ImageIcon("Image\\po5.png"));
       po5.setOpaque(true);
       po5.setBackground(Color.black);
+      
+      score=new JLabel("1000"); 
+      score.setBackground(Color.black);
+      score.setFont(new Font("ÈÞ¸Õ¸ÅÁ÷Ã¼", Font.BOLD, 55));
+      score.setForeground(Color.YELLOW);
+      
       gp = new JPanel();
       
       tf1=new JTextField();
@@ -157,6 +163,10 @@ public class GameRoom extends JPanel implements Runnable{
       po4.setBounds(1213,323,150,150);
       po5.setBounds(233,561,150,150);
       
+      score.setBounds(855, 122, 150, 50);
+      
+      add(score);
+      
       add(la1);
       add(tf1);
       
@@ -195,7 +205,7 @@ public class GameRoom extends JPanel implements Runnable{
       pb1 = new JProgressBar();
       pb1.setMaximum(100);
       pb1.setMinimum(0);
-      pb1.setForeground(Color.PINK);
+      pb1.setForeground(Color.YELLOW);
       pb1.setBackground(Color.WHITE);
       pb1.setStringPainted(true);
       pb1.setBounds(444,700, 701, 25);
@@ -261,7 +271,7 @@ public class GameRoom extends JPanel implements Runnable{
 			pb1.setValue(a);
 			try
 			{
-				Thread.sleep(5);
+				Thread.sleep(100);
 			}catch(Exception ex) {}
 			if(a==100)
 			{
