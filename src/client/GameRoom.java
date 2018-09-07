@@ -275,7 +275,7 @@ public class GameRoom extends JPanel implements Runnable{
 			}catch(Exception ex) {}
 			if(a==100)
 			{
-				
+				 
 				
 				if(i<10)
 				{
