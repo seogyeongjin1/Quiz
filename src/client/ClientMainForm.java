@@ -15,8 +15,7 @@ public class ClientMainForm extends JFrame{
 		 add("GR",gr);
 		 add("MV",mv);
 	     add("MF",wr);
-		 
-		 
+		 	 
 		 
 	     setSize(1600,900);
 	     setVisible(true);
