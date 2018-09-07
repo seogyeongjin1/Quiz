@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.table.*;
 public class GameRoom extends JPanel implements Runnable{
+   Munje mj = new Munje();
    JProgressBar pb1;
    JButton b1,b2,b3;
    JLabel la1,la2,la3,la4,la5,la6,la7,la8,la9,la10,la11,la12,la13,la14,la15,po1,po2,po3,po4,po5,score;
@@ -14,33 +15,11 @@ public class GameRoom extends JPanel implements Runnable{
    JTextField tf;
    JPanel gp;
    Image back,munje;
-   String[] image={
-		   "Image\\gameImage\\김다미.jpg",
-		   "Image\\gameImage\\디오.PNG",
-		   "Image\\gameImage\\모모.jpg",
-		   "Image\\gameImage\\박서준.jpg",
-		   "Image\\gameImage\\박진주.PNG",
-		   "Image\\gameImage\\버논.jpg",
-		   "Image\\gameImage\\승리.jpg",
-		   "Image\\gameImage\\설리.PNG",
-		   "Image\\gameImage\\송중기.jpg",
-		   "Image\\gameImage\\신민아.PNG"};
    
-   String[] dap={
-		   "Image\\gameImage\\김다미.jpg",
-		   "Image\\gameImage\\디오.PNG",
-		   "Image\\gameImage\\모모.jpg",
-		   "Image\\gameImage\\박서준.jpg",
-		   "Image\\gameImage\\박진주.PNG",
-		   "Image\\gameImage\\버논.jpg",
-		   "Image\\gameImage\\승리.jpg",
-		   "Image\\gameImage\\설리.PNG",
-		   "Image\\gameImage\\송중기.jpg",
-		   "Image\\gameImage\\신민아.PNG"};
    GameRoom()
    {
       back=Toolkit.getDefaultToolkit().getImage("Image\\3.jpg");
-      munje=Toolkit.getDefaultToolkit().getImage(image[0]);
+      munje=Toolkit.getDefaultToolkit().getImage(mj.image[0]);
       // 초기값
          b1=new JButton(new ImageIcon("Image\\ready.png"));
          b2=new JButton(new ImageIcon("Image\\start.png"));
@@ -258,7 +237,7 @@ public class GameRoom extends JPanel implements Runnable{
     //그림교체 화면
     public void setImage(int i)
     {
-    	munje=Toolkit.getDefaultToolkit().getImage(image[i]);
+    	munje=Toolkit.getDefaultToolkit().getImage(mj.image[i]);
     	repaint();
     }
 	@Override
@@ -275,22 +254,16 @@ public class GameRoom extends JPanel implements Runnable{
 			}catch(Exception ex) {}
 			if(a==100)
 			{
-				 
-				
-				if(i<10)
-				{
-					//정답 그림 변경
-				    setImage(i);
-				}
-				a=0;
 				i++;
+				a=0;
+				setImage(i);
+				
 				if(i==10)
 				{
 					// 서버 점수 전송 
 					break;
 				}
-				
-				
+
 			}
 			a++;
 			
