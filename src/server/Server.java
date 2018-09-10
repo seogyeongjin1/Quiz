@@ -65,6 +65,7 @@ public class Server implements Runnable{
 				{
 					// 100|id|name|sex
 					String msg=in.readLine();//out.write()
+					System.out.println(msg);
 					StringTokenizer st=
 							new StringTokenizer(msg, "|");
 					int protocol=Integer.parseInt(st.nextToken());
@@ -126,6 +127,11 @@ public class Server implements Runnable{
 	}
 
 }
+
+
+
+
+
 
 
 
