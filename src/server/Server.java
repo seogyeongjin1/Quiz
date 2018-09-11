@@ -1,11 +1,14 @@
 package server;
 import java.util.*;// Vector(클라이언트 정보)
+
+
+
 import java.net.*;// ServerSocket(서버=교환) , Socket(클라이언트와 통신)
 import java.io.*;// OutputStream(byte),BufferedReader(char)
 import common.*;// 기능 번호 
 public class Server implements Runnable{
     // 저장공간 (클라이언트 정보 저장)
-	Vector<Client> waitVc=new Vector<Client>();
+	 ArrayList<Client> wait=new ArrayList<Client>();
 	// 접속담당 (교환소켓)
 	ServerSocket ss;
 	private final int PORT=7777;
@@ -84,10 +87,10 @@ public class Server implements Runnable{
 						     messageAll(Function.LOGIN+"|"
 						        +id/*+"|"+name+"|"+sex*/);
 						     // 저장
-						     waitVc.addElement(this);
+						     wait.addElement(this);
 						     // 상대방의 정보를 본인 받는다 
 						     messageTo(Function.MYLOG+"|");//  대기실 갱신 
-						     for(Client client:waitVc)
+						     for(Client client:wait)
 						     {
 						    	 messageTo(Function.LOGIN+"|"
 									     +client.id+"|"
@@ -110,7 +113,7 @@ public class Server implements Runnable{
 		// 전체 전송 
 		public void messageAll(String msg)
 		{
-			for(Client client:waitVc)
+			for(Client client:wait)
 			{
 				try
 				{
