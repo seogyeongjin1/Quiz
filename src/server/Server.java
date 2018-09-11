@@ -8,15 +8,17 @@ public class Server implements Runnable{
 	Vector<Client> waitVc=new Vector<Client>();
 	// 접속담당 (교환소켓)
 	ServerSocket ss;
-	private final int PORT=3355;
+	private final int PORT=7777;
 	// 서버가동
 	public Server() 
 	{
 		try
 		{
-			ss=new ServerSocket(PORT);
+			ss=new ServerSocket(PORT);// ip인식 
+			// 전화기==> 유심(전화번호, 무선라인선) 
 			System.out.println("Server Start...");
-		}catch(Exception ex) {}
+		}catch(Exception ex) {} //  서버 IP(전화번호),PORT(전화선) 
+		// Socket s=new Socket(ip,port)
 	}
 	// 접속대기 
 	@Override
@@ -42,8 +44,8 @@ public class Server implements Runnable{
 	class Client extends Thread
 	{
 		Socket s;
-		OutputStream out;
-		BufferedReader in;
+		OutputStream out; // 결과값 보내주기
+		BufferedReader in;// 클라이언트로부터 요청값
 		
 		String id,name,sex;
 		
@@ -84,7 +86,7 @@ public class Server implements Runnable{
 						     // 저장
 						     waitVc.addElement(this);
 						     // 상대방의 정보를 본인 받는다 
-						     messageTo(Function.MYLOG+"|");
+						     messageTo(Function.MYLOG+"|");//  대기실 갱신 
 						     for(Client client:waitVc)
 						     {
 						    	 messageTo(Function.LOGIN+"|"
