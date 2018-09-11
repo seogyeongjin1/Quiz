@@ -77,12 +77,12 @@ public class Server implements Runnable{
 					     {
 					    	 // 로그인 => 입력받는다 
 						     id=st.nextToken();
-						     name=st.nextToken();
-						     sex=st.nextToken();
+						     //name=st.nextToken();
+						     //sex=st.nextToken();
 						     
 						     // 이미 접속된 사람들에게 전송 => 로그인하고 있는 사람 
 						     messageAll(Function.LOGIN+"|"
-						        +id+"|"+name+"|"+sex);
+						        +id/*+"|"+name+"|"+sex*/);
 						     // 저장
 						     waitVc.addElement(this);
 						     // 상대방의 정보를 본인 받는다 
@@ -91,8 +91,8 @@ public class Server implements Runnable{
 						     {
 						    	 messageTo(Function.LOGIN+"|"
 									     +client.id+"|"
-						    			 +client.name
-						    			 +"|"+client.sex); 
+						    			 /*+client.name
+						    			 +"|"+client.sex*/); 
 						     }
 						     
 					     }
@@ -129,11 +129,4 @@ public class Server implements Runnable{
 	}
 
 }
-
-
-
-
-
-
-
 
