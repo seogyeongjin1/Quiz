@@ -97,15 +97,14 @@ public class Server implements Runnable{
 						    			 /*+client.name
 						    			 +"|"+client.sex*/); 
 						     }
-						     
 					     }
 						 break;
 					case Function.CHAT:
 					     {
-					    	 String str=st.nextToken();
-					    	 messageAll(Function.CHAT+"|["+name+"]"+str);
+					    	
 					     }
 					     break;
+					     
 					}
 				}
 			}catch(Exception ex){}
