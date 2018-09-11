@@ -46,8 +46,7 @@ public class Server implements Runnable{
 		Socket s;
 		OutputStream out; // 결과값 보내주기
 		BufferedReader in;// 클라이언트로부터 요청값
-		
-		String id,name,sex;
+		String id,name,chat;
 		
 		public Client(Socket s)
 		{
@@ -71,12 +70,14 @@ public class Server implements Runnable{
 					StringTokenizer st=
 							new StringTokenizer(msg, "|");
 					int protocol=Integer.parseInt(st.nextToken());
+					id=st.nextToken();
+					
 					switch(protocol)
 					{
 					case Function.LOGIN:
 					     {
 					    	 // 로그인 => 입력받는다 
-						     id=st.nextToken();
+						     //id=st.nextToken();
 						     //name=st.nextToken();
 						     //sex=st.nextToken();
 						     
@@ -90,15 +91,19 @@ public class Server implements Runnable{
 						     for(Client client:wait)
 						     {
 						    	 messageTo(Function.LOGIN+"|"
-									     +client.id+"|"
-						    			 /*+client.name
+									     +client.id
+									     /*+"|"+client.name
 						    			 +"|"+client.sex*/); 
 						     }
 					     }
 						 break;
 					case Function.CHAT:
 					     {
-					    	
+					    	 chat=st.nextToken();
+						     
+						     // 이미 접속된 사람들에게 전송 => 로그인하고 있는 사람 
+						     messageAll(Function.CHAT+"|"
+						        +id+"|"+chat);
 					     }
 					     break;
 					     

@@ -50,11 +50,11 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable{
 	@Override
 	   public void actionPerformed(ActionEvent e) {
 	      // TODO Auto-generated method stub
-	      if(e.getSource()==gr.tf1)
+	      /*if(e.getSource()==gr.tf1)
 	      {
 	         String s = gr.tf1.getText();
 	         gr.tf1.setText("");
-	      }
+	      }*/
 	      
 	      if(e.getSource()==mv.b1)
 	      {
@@ -64,8 +64,7 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable{
 	            in=new BufferedReader(new InputStreamReader(s.getInputStream()));
 	               // byte ==> 2byte
 	            out=s.getOutputStream();
-	            msg=mv.tf.getText();
-	            card.show(getContentPane(), "MF");
+	            out.write((100+"|"+mv.tf.getText()).getBytes());
 	            
 	         }catch(Exception ex) {}
 	         new Thread(this).start();
@@ -77,7 +76,7 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable{
 	            return;
 	         try
 	         {
-	            out.write((msg+"\n").getBytes());
+	            out.write(("["+id+"]"+msg+"\n").getBytes());
 	         }catch(Exception ex) {}
 	         wr.tf.setText("");
 	         wr.tf.requestFocus();
@@ -98,30 +97,22 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable{
 					int protocol=Integer.parseInt(st.nextToken());
 					switch(protocol)
 					{
-					case Function.LOGIN:
+						case Function.LOGIN:
 					     {
-					    	 // 로그인 => 입력받는다 
-						     id=st.nextToken();
-						     
-						     // 이미 접속된 사람들에게 전송 => 로그인하고 있는 사람 
-						     messageAll(Function.LOGIN+"|"
-						        +id/*+"|"+name+"|"+sex*/);
-						     // 저장
-						      wait.add(this);
-						     // 상대방의 정보를 본인 받는다 
-						     messageTo(Function.MYLOG+"|");//  대기실 갱신 
-						     for(Client client:wait)
-						     {
-						    	 messageTo(Function.LOGIN+"|"
-									     +client.id+"|"
-						    			 /*+client.name
-						    			 +"|"+client.sex*/); 
-						     }
+					    	 
+					         card.show(getContentPane(), "MF");
 					     }
 						 break;
-					case Function.CHAT:
+						case Function.MYLOG:
 					     {
 					    	
+					     }
+						 break;
+						case Function.CHAT:
+					     {
+					    	 msg=in.readLine();
+					         String id=in.readLine();
+					         ta.append("["+id+"]"+msg+"\n");
 					     }
 					     break;
 					     
