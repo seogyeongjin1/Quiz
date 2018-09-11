@@ -19,7 +19,7 @@ public class GameRoom extends JPanel implements Runnable{
    GameRoom()
    {
       back=Toolkit.getDefaultToolkit().getImage("Image\\3.jpg");
-      munje=Toolkit.getDefaultToolkit().getImage(mj.image[0]);
+      munje=Toolkit.getDefaultToolkit().getImage(mj.dap[0]);
       // 초기값
          b1=new JButton(new ImageIcon("Image\\ready.png"));
          b2=new JButton(new ImageIcon("Image\\start.png"));
@@ -236,9 +236,15 @@ public class GameRoom extends JPanel implements Runnable{
       }
 
     //그림교체 화면
-    public void setImage(int i)
+    public void setmunje(int i)
     {
-    	munje=Toolkit.getDefaultToolkit().getImage(mj.image[i]);
+    	munje=Toolkit.getDefaultToolkit().getImage(mj.mun[i]);
+    	repaint();
+    }
+  //그림교체 화면
+    public void setdap(int i)
+    {
+    	munje=Toolkit.getDefaultToolkit().getImage(mj.dap[i]);
     	repaint();
     }
 	@Override
@@ -246,21 +252,38 @@ public class GameRoom extends JPanel implements Runnable{
 		// TODO Auto-generated method stub
 		int a=0;
 		int i=0;
+		boolean check = false; //true면 문제에 관한거(문제시간, 문제 변경); false면 (답시간, 답사진변경)
+
 		while(true)
 		{
 			pb1.setValue(a);
 			try
 			{
-				Thread.sleep(50);
+				if(check==true) // 문제 관한 쓰레드
+					Thread.sleep(100);
+				else			// 답 관한 쓰레드
+					Thread.sleep(20);
 			}catch(Exception ex) {}
-			if(a==100)
+			
+			
+			if(a==100) //프로그래스바가 다 찼을 때
 			{
-				i++;
-				a=0;
-				setImage(i);
+				a=0; //프로그래스바 초기화
+				if(check==true) 
+				{
+					setdap(i);  //답 그림 세팅
+					check=false;
+				}
+				else
+				{
+					i++;
+					setmunje(i); //문제 그림 세팅
+					check=true;
+				}
 				
 				if(i==10)
 				{
+					// 게임 끝
 					// 서버 점수 전송 
 					break;
 				}
