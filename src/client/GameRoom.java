@@ -25,7 +25,7 @@ public class GameRoom extends JPanel implements Runnable{
          b2=new JButton(new ImageIcon("Image\\start.png"));
          b3=new JButton(new ImageIcon("Image\\wait_exit2.png")); // 클래스 초기화
       
-           
+            
          
       la1=new JLabel();
       la1.setOpaque(true);
