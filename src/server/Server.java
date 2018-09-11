@@ -1,8 +1,5 @@
 package server;
 import java.util.*;// Vector(클라이언트 정보)
-
-
-
 import java.net.*;// ServerSocket(서버=교환) , Socket(클라이언트와 통신)
 import java.io.*;// OutputStream(byte),BufferedReader(char)
 import common.*;// 기능 번호 
@@ -87,7 +84,7 @@ public class Server implements Runnable{
 						     messageAll(Function.LOGIN+"|"
 						        +id/*+"|"+name+"|"+sex*/);
 						     // 저장
-						     wait.addElement(this);
+						      wait.add(this);
 						     // 상대방의 정보를 본인 받는다 
 						     messageTo(Function.MYLOG+"|");//  대기실 갱신 
 						     for(Client client:wait)
