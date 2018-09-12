@@ -22,7 +22,7 @@ public class Server implements Runnable{
 		}catch(Exception ex) {} //  서버 IP(전화번호),PORT(전화선) 
 		// Socket s=new Socket(ip,port)
 	}
-	// 접속대기 
+	// 접속대기  
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
