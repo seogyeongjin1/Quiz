@@ -96,7 +96,7 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable{
 	            out.write((Function.CHAT+"|"+myid+"|"+chat+"\n").getBytes()); //채팅 날리기
 	         }catch(Exception ex) {}
 	         wr.tf.setText("");
-	         //wr.tf.requestFocus();
+	         wr.tf.requestFocus();
 	      }
 	   }
 	
