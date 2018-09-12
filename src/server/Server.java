@@ -103,6 +103,42 @@ public class Server implements Runnable{
 						     }
 					     }
 						 break;
+					case Function.MAKEROOM:
+						
+						break;
+					case Function.ROOMIN:
+						
+						break;
+					case Function.ROOMOUT:
+						
+						break;
+					case Function.MYROOMOUT:
+	
+						break;
+					case Function.WAITUPDATE:
+	
+						break;
+					case Function.ROOMPOSITION:
+	
+						break;
+					case Function.GAMEREADY:
+	
+						break;
+					case Function.GAMESTART:
+	
+						break;
+					case Function.GAMEYESNO:
+	
+						break;
+					case Function.GAMESCORE:
+	
+						break;
+					case Function.GAMERANK:
+	
+						break;
+					case Function.GAMEEND:
+	
+						break;
 					case Function.CHAT:
 					     {
 					    	 id=st.nextToken();
@@ -113,6 +149,13 @@ public class Server implements Runnable{
 						        +id+"|"+chat);
 					     }
 					     break;
+					case Function.GAMECHAT:
+						
+						break;
+					case Function.LOGOUT:
+	
+						break;
+					
 					     
 					}
 				}
