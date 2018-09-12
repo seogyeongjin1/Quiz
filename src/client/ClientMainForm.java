@@ -78,7 +78,7 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable{
         	 
 	         try
 	         {
-		         out.write((Function.LOGIN+"|"+myid).getBytes()); //내아이디 날려주기
+		         out.write((Function.LOGIN+"|"+myid+"\n").getBytes()); //내아이디 날려주기
 	         }catch(Exception ex) {}
 	         card.show(getContentPane(), "MF");
 	      }
@@ -91,10 +91,10 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable{
 	         
 	         try
 	         {
-	            out.write((Function.CHAT+"|"+myid+"|"+chat).getBytes());
+	            out.write((Function.CHAT+"|"+myid+"|"+chat+"\n").getBytes()); //채팅 날리기
 	         }catch(Exception ex) {}
 	         wr.tf.setText("");
-	         wr.tf.requestFocus();
+	         //wr.tf.requestFocus();
 	      }
 	   }
 	
