@@ -19,7 +19,7 @@ public class Server implements Runnable{
 			ss=new ServerSocket(PORT);// ip인식 
 			// 전화기==> 유심(전화번호, 무선라인선) 
 			System.out.println("Server Start...");
-		}catch(Exception ex) {} //  서버 IP(전화번호),PORT(전화선) 
+		}catch(Exception ex) {} //  서버 IP(전화번호),PORT(전화선)  
 		// Socket s=new Socket(ip,port)
 	}
 	// 접속대기 
