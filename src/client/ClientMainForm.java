@@ -37,6 +37,7 @@ public class ClientMainForm extends JFrame implements ActionListener{
 	   public void actionPerformed(ActionEvent e) {
 	      // TODO Auto-generated method stub
 	      if(e.getSource()==gr.tf1)
+	    	  
 	      {
 	         String s = gr.tf1.getText();
 	         gr.tf1.setText("");
