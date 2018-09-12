@@ -70,7 +70,7 @@ public class Server implements Runnable{
 			{
 				while(true)
 				{
-					// 100|id|name|sex
+					
 					String msg=in.readLine();//out.write()
 					System.out.println(msg);
 					StringTokenizer st=
@@ -85,12 +85,11 @@ public class Server implements Runnable{
 					    	 // 로그인 => 입력받는다 
 						     id=st.nextToken();
 						     location = "대기중";
-						     //name=st.nextToken();
-						     //sex=st.nextToken();
-					    	 wait.add(this);
+
+					    	 //wait.add(this);
 						     // 이미 접속된 사람들에게 전송 => 로그인하고 있는 사람 
 						     messageAll(Function.LOGIN+"|"
-						        +id+"|"+location/*+"|"+name+"|"+sex*/);
+						        +id+"|"+location);
 						     System.out.println("메세지 보냈다");
 						     // 저장
 						      
@@ -100,9 +99,7 @@ public class Server implements Runnable{
 						     for(Client client:wait)
 						     {
 						    	 messageTo(Function.MYLOG +"|"
-									     +client.id + "|"+client.location
-									     /*+"|"+client.name
-						    			 +"|"+client.sex*/); 
+									     +client.id + "|"+client.location); 
 						     }
 					     }
 						 break;

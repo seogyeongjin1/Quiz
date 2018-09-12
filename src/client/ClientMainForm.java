@@ -124,12 +124,14 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable{
 						 break;
 						case Function.MYLOG:
 					     {
-				    			 id=st.nextToken();
-						    	 location = st.nextToken();
-				    			 String[] data= {id,id,location};
-				    			 wr.model2.addRow(data);
-					     	 
-					     }	
+					    	 id=st.nextToken();
+					    	 if(myid.equals(id)) 
+					    		 break;
+					    	 location = st.nextToken();
+			    			 String[] data= {id,id,location};
+			    			 wr.model2.addRow(data);
+					     }
+					     	
 						 break;
 						case Function.CHAT:
 					     {
