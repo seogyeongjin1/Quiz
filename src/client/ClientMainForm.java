@@ -34,7 +34,7 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable{
 		 add("GR",gr); //°ÔÀÓÃ¢
 		 	 
 		 
-	     setSize(1600,900);
+	     setSize(1600,900); 
 	     setVisible(true);
 	     setResizable(false);
 	     
@@ -54,7 +54,9 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable{
 	@Override
 	   public void actionPerformed(ActionEvent e) {
 	      // TODO Auto-generated method stub
+	      if(e.getSource()==gr.tf1)
 	      /*if(e.getSource()==gr.tf1)
+>>>>>>> branch 'master' of https://github.com/seogyeongjin1/Quiz.git
 	      {
 	         String s = gr.tf1.getText();
 	         gr.tf1.setText("");
@@ -126,7 +128,7 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable{
 					     {
 					    	 id=st.nextToken();
 					    	 if(myid.equals(id)) 
-					    		 break;
+					    		 break; 
 					    	 location = st.nextToken();
 			    			 String[] data= {id,id,location};
 			    			 wr.model2.addRow(data);
