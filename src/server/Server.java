@@ -3,6 +3,7 @@ import java.util.*;// Vector(클라이언트 정보)
 import java.net.*;// ServerSocket(서버=교환) , Socket(클라이언트와 통신)
 import java.io.*;// OutputStream(byte),BufferedReader(char)
 import common.*;// 기능 번호 
+import server.Server1.Client;
 public class Server implements Runnable{
     // 저장공간 (클라이언트 정보 저장)
 	 ArrayList<Client> wait=new ArrayList<Client>();
@@ -28,9 +29,14 @@ public class Server implements Runnable{
 		{
 			while(true)
 			{
-				Socket s=ss.accept();// new Socket()
-				Client client=new Client(s);
-				client.start();// run()
+				Socket s=ss.accept();// 접속
+	            // s==> 클라이언트의 ip, port
+	            System.out.println(s.getInetAddress().getHostAddress());
+	            System.out.println(s.getPort());
+	            
+	            Client client=new Client(s);
+	            wait.add(client);
+	            client.start();// 통신시작 
 			}
 		}catch(Exception ex) {}
 		
@@ -46,7 +52,7 @@ public class Server implements Runnable{
 		Socket s;
 		OutputStream out; // 결과값 보내주기
 		BufferedReader in;// 클라이언트로부터 요청값
-		String id,name,chat;
+		String id,name,chat,location;
 		
 		public Client(Socket s)
 		{
@@ -70,28 +76,31 @@ public class Server implements Runnable{
 					StringTokenizer st=
 							new StringTokenizer(msg, "|");
 					int protocol=Integer.parseInt(st.nextToken());
-					id=st.nextToken();
+					System.out.println(protocol);
 					
 					switch(protocol)
 					{
 					case Function.LOGIN:
 					     {
 					    	 // 로그인 => 입력받는다 
-						     //id=st.nextToken();
+						     id=st.nextToken();
+						     location = "대기중";
 						     //name=st.nextToken();
 						     //sex=st.nextToken();
-						     
+					    	 wait.add(this);
 						     // 이미 접속된 사람들에게 전송 => 로그인하고 있는 사람 
 						     messageAll(Function.LOGIN+"|"
-						        +id/*+"|"+name+"|"+sex*/);
+						        +id+"|"+location/*+"|"+name+"|"+sex*/);
+						     System.out.println("메세지 보냈다");
 						     // 저장
-						      wait.add(this);
+						      
 						     // 상대방의 정보를 본인 받는다 
-						     messageTo(Function.MYLOG+"|");//  대기실 갱신 
+						     //messageTo(Function.MYLOG+"|");
+						     //  대기실 갱신 
 						     for(Client client:wait)
 						     {
-						    	 messageTo(Function.LOGIN+"|"
-									     +client.id
+						    	 messageTo(Function.MYLOG +"|"
+									     +client.id + "|"+client.location
 									     /*+"|"+client.name
 						    			 +"|"+client.sex*/); 
 						     }
@@ -99,6 +108,7 @@ public class Server implements Runnable{
 						 break;
 					case Function.CHAT:
 					     {
+					    	 id=st.nextToken();
 					    	 chat=st.nextToken();
 						     
 						     // 이미 접속된 사람들에게 전송 => 로그인하고 있는 사람 

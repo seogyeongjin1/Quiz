@@ -24,18 +24,22 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable{
 	Socket s;
     BufferedReader in;//  서버
     OutputStream out;// 서버 
-    String msg,id,name,sex;
+    String myid,msg,id,chat,location;
 	public ClientMainForm()
 	{                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
 		 setLayout(card);
 		 
-		 add("GR",gr);
-		 add("MV",mv);
-	     add("MF",wr);
+		 add("MV",mv); //로그인창
+		 add("MF",wr); //대기실창
+		 add("GR",gr); //게임창
 		 	 
 		 
 	     setSize(1600,900);
 	     setVisible(true);
+	     setResizable(false);
+	     
+	     mv.b1.addActionListener(this); //로그인버튼
+	     wr.tf.addActionListener(this);
 	     
 	     setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
@@ -44,7 +48,7 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable{
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		new ClientMainForm();
+		new ClientMainForm().setLocationRelativeTo(null);
 	}
 
 	@Override
@@ -56,27 +60,38 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable{
 	         gr.tf1.setText("");
 	      }*/
 	      
-	      if(e.getSource()==mv.b1)
+	      if(e.getSource()==mv.b1) //로그인버튼
 	      {
+	    	 myid = mv.tf.getText(); //내 아이디 저장
+	        	 if(myid.trim().length()<1)
+	 	            return;
+	        	 
 	         try
 	         {
 	            s=new Socket("211.238.142.63", 7777);
 	            in=new BufferedReader(new InputStreamReader(s.getInputStream()));
 	               // byte ==> 2byte
 	            out=s.getOutputStream();
-	            out.write((100+"|"+mv.tf.getText()).getBytes());
-	            
 	         }catch(Exception ex) {}
 	         new Thread(this).start();
-	      }
-	      else if(e.getSource()==wr.tf)
-	      {
-	         msg=wr.tf.getText();
-	         if(msg.trim().length()<1)
-	            return;
+ 
+        	 
 	         try
 	         {
-	            out.write(("["+id+"]"+msg+"\n").getBytes());
+		         out.write((Function.LOGIN+"|"+myid).getBytes()); //내아이디 날려주기
+	         }catch(Exception ex) {}
+	         card.show(getContentPane(), "MF");
+	      }
+	      
+	      if(e.getSource()==wr.tf)
+	      {
+	         chat=wr.tf.getText();
+	         if(chat.trim().length()<1)
+	            return;
+	         
+	         try
+	         {
+	            out.write((Function.CHAT+"|"+myid+"|"+chat).getBytes());
 	         }catch(Exception ex) {}
 	         wr.tf.setText("");
 	         wr.tf.requestFocus();
@@ -95,24 +110,32 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable{
 					StringTokenizer st=
 							new StringTokenizer(msg, "|");
 					int protocol=Integer.parseInt(st.nextToken());
+					
 					switch(protocol)
 					{
 						case Function.LOGIN:
 					     {
-					    	 
-					         card.show(getContentPane(), "MF");
+					    	 id=st.nextToken();
+					    	 location = st.nextToken();
+					         wr.ta.append("["+id+"] 님이 입장하였습니다.\n");
+					         String[] data= {id,id,location};
+					         wr.model2.addRow(data);
 					     }
 						 break;
 						case Function.MYLOG:
 					     {
-					    	
-					     }
+				    			 id=st.nextToken();
+						    	 location = st.nextToken();
+				    			 String[] data= {id,id,location};
+				    			 wr.model2.addRow(data);
+					     	 
+					     }	
 						 break;
 						case Function.CHAT:
 					     {
-					    	 msg=in.readLine();
-					         String id=in.readLine();
-					         ta.append("["+id+"]"+msg+"\n");
+					    	 id=st.nextToken();
+					    	 chat=st.nextToken();
+					         wr.ta.append("["+id+"]  "+chat+"\n");
 					     }
 					     break;
 					     
@@ -120,4 +143,5 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable{
 				}
 			}catch(Exception ex){}
 		}
+		
 }
