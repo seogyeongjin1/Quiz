@@ -182,11 +182,6 @@ public class WaitRoom extends JPanel{
          b8.setBounds(1320, 710, 220, 100);
          setSize(1600,900);
        setVisible(true);
-      
-     
-       String[] data= {"lobo01","닉네임","대기실"};
-         model2.addRow(data);
-      
 
     }
    public static void main(String[] args) {

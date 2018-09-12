@@ -22,12 +22,12 @@ public class MainView extends JPanel{
        // 배치
        setLayout(null); //배치를 사용하지 않고 직접 배치
        
-       b1.setBounds(755, 689, 104, 48);
+       b1.setBounds(745, 689, 104, 48);
        b1.setBorderPainted(false);
        b1.setFocusPainted(false);
        b1.setContentAreaFilled(false);
        
-       b2.setBounds(755, 689, 104, 48);
+       b2.setBounds(745, 689, 104, 48);
        b2.setBorderPainted(false);
        b2.setFocusPainted(false);
        b2.setContentAreaFilled(false);
