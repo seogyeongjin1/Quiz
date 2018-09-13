@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 
-public class WaitRoom_NewRoom_Panel extends JFrame{
+public class WaitRoom_NewRoom_Panel extends JPanel{
    JLabel la1,la2,la3; // 规力格 , 牢盔 , 规父甸扁 力格
    Image back;
    JTextField roomName, roomPsw;
@@ -77,6 +77,7 @@ public class WaitRoom_NewRoom_Panel extends JFrame{
       
       add(okButton);
       add(noButton);  
+
       
       //setSize(600, 500);
 	  //setVisible(true);

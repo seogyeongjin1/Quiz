@@ -52,7 +52,15 @@ public class WaitRoom extends JPanel{
        String[] col1={"아이디","닉네임","위치"};
        String[][] row1=new String[0][3];
        model2=new DefaultTableModel(row1, col1);
-       table2=new JTable(model2);
+       table2=new JTable(model2)
+       {
+    	   @Override
+			public boolean isCellEditable(int row, int column) 
+    	   {
+				// TODO Auto-generated method stub
+				return false;
+    	   }
+       };
        table2.getTableHeader().setReorderingAllowed(false); // 셀 이동불가
        table2.getTableHeader().setResizingAllowed(false);   // 셀 크기 조절 불가
 

@@ -20,7 +20,7 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable{
    MainView mv = new MainView();  //로그인창 생성
    WaitRoom wr = new WaitRoom();  //대기창 생성
    GameRoom gr = new GameRoom();  //게임룸 생성
-   WaitRoom_NewRoom_Panel nr=new WaitRoom_NewRoom_Panel();
+   WaitRoom_NewRoom nr=new WaitRoom_NewRoom();
    Socket s;
     BufferedReader in;//  서버
     OutputStream out;// 서버 
@@ -42,7 +42,8 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable{
         mv.b1.addActionListener(this); //로그인버튼
         wr.tf.addActionListener(this);
         wr.b7.addActionListener(this);
-        
+        nr.wnp.noButton.addActionListener(this);
+        nr.wnp.okButton.addActionListener(this);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
    }
    
@@ -65,7 +66,7 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable{
                
             try
             {
-               s=new Socket("211.238.142.64", 7777);
+               s=new Socket("211.238.142.63", 7777);
 
                in=new BufferedReader(new InputStreamReader(s.getInputStream()));
                   // byte ==> 2byte
@@ -95,10 +96,10 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable{
          }
          else if(e.getSource()==wr.b7)
          {
-        	 nr.roomName.setText("");
+        	 nr.wnp.roomName.setText("");
  			
  			
- 			nr.la3.setVisible(false);
+ 			nr.wnp.la3.setVisible(false);
  			
  			// 다시 방만들기를 할 때마다 메모리 초기화
  			
@@ -107,20 +108,20 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable{
  			nr.setVisible(true);
          }
          // 실제 방 만들기
-         else if(e.getSource()==nr.noButton)
+         else if(e.getSource()==nr.wnp.noButton)
          {
         	 nr.setVisible(false);
          }
-         else if(e.getSource()==nr.okButton)
+         else if(e.getSource()==nr.wnp.okButton)
          {
         	 {
      			// 입력된 방 정보를 읽기
-     			String rname=nr.roomName.getText();
+     			String rname=nr.wnp.roomName.getText();
      			if(rname.trim().length()<1)
      			{
      				// 입력이 안된 상태
      				JOptionPane.showMessageDialog(this, "방이름을 입력하세요");
-     				nr.roomName.requestFocus();
+     				nr.wnp.roomName.requestFocus();
      				return;
      			}
      			
@@ -131,8 +132,8 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable{
      				if(temp.equals(rname))
      				{
      					JOptionPane.showMessageDialog(this, "이미 존재하는 방입니다\n다시 입력하세요");// 중복체크
-     					nr.roomName.setText("");
-     					nr.roomName.requestFocus();
+     					nr.wnp.roomName.setText("");
+     					nr.wnp.roomName.requestFocus();
      					return;
      				}
      			}
