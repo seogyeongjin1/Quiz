@@ -11,6 +11,7 @@ public class WaitRoom extends JPanel{
     JTextField tf,tf2;
     JButton b1,b2,b3,b4,b5,b6,b7,b8;
     Image back, wait;
+    JScrollBar bar;
     JPanel p1,p2,p3,p4,p5,p6;
     
     
@@ -23,7 +24,9 @@ public class WaitRoom extends JPanel{
        la2=new JLabel("채팅방");
        la3=new JLabel("접속자 정보");
        ta=new JTextArea();
-       JScrollPane js3=new JScrollPane(ta);
+       JScrollPane js3=new JScrollPane(ta);       
+       
+       bar= js3.getVerticalScrollBar();
        tf=new JTextField();
        tf2=new JTextField();
        
@@ -45,17 +48,15 @@ public class WaitRoom extends JPanel{
 
        
        //table
-       String[] col={"방이름","공개/비공개","인원"};
-       String[][] row=new String[0][3];
-       model1=new DefaultTableModel(row, col);
-       table1=new JTable(model1);
-       JScrollPane js1=new JScrollPane(table1);
-       
        
        String[] col1={"아이디","닉네임","위치"};
        String[][] row1=new String[0][3];
        model2=new DefaultTableModel(row1, col1);
        table2=new JTable(model2);
+       table2.getTableHeader().setReorderingAllowed(false); // 셀 이동불가
+       table2.getTableHeader().setResizingAllowed(false);   // 셀 크기 조절 불가
+
+
        JScrollPane js4=new JScrollPane(table2);
        js4.setOpaque(false);
        js4.getViewport().setOpaque(false);
@@ -64,7 +65,6 @@ public class WaitRoom extends JPanel{
        // 배치
        la1.setBounds(65, 25, 100, 30);
        la1.setForeground(Color.white);
-       js1.setBounds(10, 50, 500, 300);
        
        add(la1);
        //add(js1);

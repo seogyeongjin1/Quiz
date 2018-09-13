@@ -1,5 +1,4 @@
 package client;
-
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -64,7 +63,7 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable{
                
             try
             {
-               s=new Socket("211.238.142.63", 7777);
+               s=new Socket("211.238.142.64", 7777);
                in=new BufferedReader(new InputStreamReader(s.getInputStream()));
                   // byte ==> 2byte
                out=s.getOutputStream();
@@ -106,7 +105,7 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable{
                      new StringTokenizer(msg, "|");
                int protocol=Integer.parseInt(st.nextToken());
                
-               switch(protocol)
+               switch(protocol) // MYLOG
                {
                   case Function.LOGIN:
                     {
@@ -119,10 +118,11 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable{
                    break;
                   case Function.MYLOG:
                     {
-                    	id = st.nextToken();
+                    	id = st.nextToken(); // aaa
                        String[] data={
-       						id,id,//ID
-       						st.nextToken()//location
+       						id,
+       						id,//ID
+       						st.nextToken()//location // ´ë±â½Ç
        					 };
        					 wr.model2.addRow(data);
                     }
@@ -133,6 +133,7 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable{
                        id=st.nextToken();
                        chat=st.nextToken();
                         wr.ta.append(id+" "+chat+"\n");
+                        wr.bar.setValue(wr.bar.getMaximum());
                     }
                     break;
                     
