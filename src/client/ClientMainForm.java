@@ -25,31 +25,7 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable{
     BufferedReader in;//  서버
     OutputStream out;// 서버 
     String myid,msg,id,chat,location;
-	public ClientMainForm()
-	{                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
-		 setLayout(card);
-		 
-		 add("MV",mv); //로그인창
-		 add("MF",wr); //대기실창
-		 add("GR",gr); //게임창
-		 	 
-		 
-	     setSize(1600,900);
-	     setVisible(true);
-	     setResizable(false);
-	     
-	     mv.b1.addActionListener(this); //로그인버튼
-	     wr.tf.addActionListener(this);
-	     
-	     setDefaultCloseOperation(EXIT_ON_CLOSE); // 종료시 메모리 삭제
-	}
 	
-	
-	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		new ClientMainForm().setLocationRelativeTo(null);
-	}
    public ClientMainForm()
    {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
        setLayout(card);
