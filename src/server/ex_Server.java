@@ -1,16 +1,11 @@
-package server;
+/*package server;
 import java.util.*;
+
 import common.Function;
 
 import java.net.*;
 import java.io.*;
 
-
-//         이게 현재 진짜 서버
-
-
-
-/*
  *   1. 연결 기계 (핸드폰) ==> 구매 
  *      ======
  *       Socket : 다른 컴퓨터와 연결 
@@ -27,16 +22,16 @@ import java.io.*;
  *   ====
  *    1) 교환소켓
  *    2) 통신소켓 ==> 접속자마다 생성 ==> Thread
- */
-public class Server1 implements Runnable{
+ 
+public class ex_Server implements Runnable{
     // 서버 소켓 생성 
 	private ServerSocket ss;
-	private final int PORT=7777;
+	private final int PORT=3355;
 	// 클라이언트 정보를 저장 
 	private ArrayList<Client> waitList=
 			   new ArrayList<Client>();
 	// 클라이언트의 IP,id....
-	public Server1()// 프로그램에서 시작과 동시 수행 : 생성자,main
+	public ex_Server()// 프로그램에서 시작과 동시 수행 : 생성자,main
 	{
 		// 서버 ==> 구동할때 한개 컴퓨터에서 두번을 실행 할 수 없다
 		try
@@ -67,7 +62,7 @@ public class Server1 implements Runnable{
 	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Server1 server=new Server1();
+		ex_Server server=new ex_Server();
         new Thread(server).start();
 	}
 	
@@ -94,7 +89,7 @@ public class Server1 implements Runnable{
     		}catch(Exception ex){}
     	}
     	// 통신 
-    	/*
+    	
     	     서버   =======> 
     	      데이터를 받아서 처리
     	      결과을 보내준다
@@ -102,7 +97,7 @@ public class Server1 implements Runnable{
     	        요청을 위해 필요한 데이터 전송
     	        로그인 : ID,PWD
     	        결과값을 받아서 화면에 출력  
-    	 */
+    	 
     	public void run()
     	{
     		try
@@ -118,44 +113,53 @@ public class Server1 implements Runnable{
     				// 100|id|name
     				// 번호 ==> 기능 (요청 번호)
     				StringTokenizer st=new StringTokenizer(msg, "|");
-    				int protocal=Integer.parseInt(st.nextToken());
-    				switch(protocal)
+    				int no=Integer.parseInt(st.nextToken());
+    				switch(no)
     				{
     				  case Function.LOGIN:// login.jsp
     				  {
     					 id=st.nextToken();
+    					 name=st.nextToken();
     					 pos="대기실";
     					 // 접속한 모든 사람에게 로그인을 알려준다(테이블에 출력)
-    					 messageAll(Function.LOGIN+"|"+id+"|"+pos);
+    					 messageAll(Function.LOGIN+"|"+id+"|"+name+"|"+pos);
     					 // 본인은 추가하지 않는다 
     					 // 본인을 추가 
     					 waitList.add(this);
     					 // 1. 로그인 ==> 대기실로 변경 
-    					 //messageTo(Function.MYLOG+"|"+id);
+    					 messageTo(Function.MYLOG+"|"+id);
     					 // 2. 접속자 명단을 전송 
     					 for(Client client:waitList)
     					 {
-    						 messageTo(Function.MYLOG+"|"
+    						 messageTo(Function.LOGIN+"|"
     								+client.id+"|"
+    								+client.name+"|"
     								+client.pos);
     					 }
+    					 // 개설된 방 전송
+    					 
+    					  *   로그인 
+    					  *   방개설
+    					  *   방들어가기
+    					  *   방나가기 
+    					  *   ==> 게임프로그램 (X)
+    					  
     				  }
     				  break;
     				  // 채팅 요청처리
-    				  case Function.WAITCHAT:
+    				  case Function.CHAT:
     				  {
-    					  String id = st.nextToken();
-    					  String chat=st.nextToken();
-    					  messageAll(Function.WAITCHAT+"|["+id+"]| "+chat);
+    					  String data=st.nextToken();
+    					  messageAll(Function.CHAT+"|["+name+"]"+data);
     				  }
     				  break;
     				}
     			}
     		}catch(Exception ex){}
     	}
-    	/*
+    	
     	 *   서버 ==> 클라이언트 전송 메세지 
-    	 */
+    	 
     	//  전체 전송하는 메세지
     	public void messageAll(String msg)
     	{
@@ -185,3 +189,4 @@ public class Server1 implements Runnable{
 
 
 
+*/

@@ -22,7 +22,7 @@ public class Function {
    //public static final int GAMETIMER=370; //게임 시간
    public static final int GAMEEND=390; // 게임 종료
    // 채팅 관련
-   public static final int CHAT=400;//채팅하기
+   public static final int WAITCHAT=400;//채팅하기
    public static final int GAMECHAT=410;//채팅하기
    public static final int LOGOUT=500;//게임종료
 } 
