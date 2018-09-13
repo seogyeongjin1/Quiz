@@ -1,5 +1,8 @@
 package server;
 import java.util.*;
+
+import server.Room;
+
 import common.Function;
 
 import java.net.*;
@@ -33,8 +36,9 @@ public class Server1 implements Runnable{
 	private ServerSocket ss;
 	private final int PORT=7777;
 	// 클라이언트 정보를 저장 
-	private ArrayList<Client> waitList=
+	ArrayList<Client> waitList=
 			   new ArrayList<Client>();
+	ArrayList<Room> roomList=new ArrayList<Room>();
 	// 클라이언트의 IP,id....
 	public Server1()// 프로그램에서 시작과 동시 수행 : 생성자,main
 	{
@@ -143,6 +147,14 @@ public class Server1 implements Runnable{
     				  break;
     				  // 채팅 요청처리
     				  case Function.WAITCHAT:
+    				  {
+    					  String id = st.nextToken();
+    					  String chat=st.nextToken();
+    					  messageAll(Function.WAITCHAT+"|["+id+"]| "+chat);
+    				  }
+    				  break;
+    				  
+    				  case Function.GAMECHAT:
     				  {
     					  String id = st.nextToken();
     					  String chat=st.nextToken();

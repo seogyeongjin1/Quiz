@@ -7,12 +7,12 @@ public class Room {
     String roomName,roomState,roomPwd;
     int maxcount;
     int current;
-    Vector<Server.Client> userVc=new Vector<Server.Client>();
-    public Room(String rn,String rs,String rp,int max)
+    ArrayList<Server.Client> userList=new ArrayList<Server.Client>();
+    public Room(String rn,int max)
     {
     	roomName=rn;
-    	roomState=rs;
-    	roomPwd=rp;
+    	//roomState=rs;
+    	//roomPwd=rp;
     	maxcount=max;
     	current=1;
     }
