@@ -112,7 +112,7 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable{
                     {
                        id=st.nextToken();
                        location = st.nextToken();
-                        wr.ta.append("["+id+"]"+" 님이 입장하였습니다.\n");
+                        wr.ta.append("※ ["+id+"]"+" 님이 입장하였습니다.\n");
                         String[] data= {id,id,location};
                         wr.model2.addRow(data);
                     }

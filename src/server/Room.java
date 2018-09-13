@@ -7,7 +7,7 @@ public class Room {
     String roomName,roomState,roomPwd;
     int maxcount;
     int current;
-    Vector<Server1.Client> userVc=new Vector<Server1.Client>();
+    Vector<Server.Client> userVc=new Vector<Server.Client>();
     public Room(String rn,String rs,String rp,int max)
     {
     	roomName=rn;
