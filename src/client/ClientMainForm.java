@@ -119,9 +119,9 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable{
                    break;
                   case Function.MYLOG:
                     {
+                    	id = st.nextToken();
                        String[] data={
-                    		myid,
-       						st.nextToken(),//ID
+       						id,id,//ID
        						st.nextToken()//location
        					 };
        					 wr.model2.addRow(data);
