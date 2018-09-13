@@ -25,7 +25,6 @@ public class WaitRoom extends JPanel{
        ta=new JTextArea();
        JScrollPane js3=new JScrollPane(ta);
        tf=new JTextField();
-       tf.setEnabled(false);
        tf2=new JTextField();
        
        p1=new JPanel();
