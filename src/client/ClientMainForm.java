@@ -54,11 +54,6 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable{
    @Override
       public void actionPerformed(ActionEvent e) {
          // TODO Auto-generated method stub
-         /*if(e.getSource()==gr.tf1)
-         {
-            String s = gr.tf1.getText();
-            gr.tf1.setText("");
-         }*/
          
          if(e.getSource()==mv.b1) //로그인버튼
          {
@@ -72,14 +67,9 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable{
                in=new BufferedReader(new InputStreamReader(s.getInputStream()));
                   // byte ==> 2byte
                out=s.getOutputStream();
-            }catch(Exception ex) {}
-            new Thread(this).start();
- 
-            
-            try
-            {
                out.write((Function.LOGIN+"|"+myid+"\n").getBytes()); //내아이디 날려주기
             }catch(Exception ex) {}
+            new Thread(this).start();
             card.show(getContentPane(), "MF");
          }
          
@@ -87,14 +77,18 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable{
          {
             chat=wr.tf.getText();
             if(chat.trim().length()<1)
+            {
+               wr.tf.setText("");
                return;
+            }
             
             try
             {
-               out.write((Function.CHAT+"|"+myid+"|"+chat+"\n").getBytes()); //채팅 날리기
+               out.write((Function.WAITCHAT+"|"+myid+"|"+chat+"\n").getBytes()); //채팅 날리기
+               wr.tf.setText("");
+               wr.tf.requestFocus(); // focusS
             }catch(Exception ex) {}
-            wr.tf.setText("");
-            //wr.tf.requestFocus();
+            
          }
       }
    
@@ -117,27 +111,27 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable{
                     {
                        id=st.nextToken();
                        location = st.nextToken();
-                        wr.ta.append("["+id+"] 님이 입장하였습니다.\n");
+                        wr.ta.append(id+" 님이 입장하였습니다.\n");
                         String[] data= {id,id,location};
                         wr.model2.addRow(data);
                     }
                    break;
                   case Function.MYLOG:
                     {
-                       id=st.nextToken();
-                       if(myid.equals(id)) 
-                          break;
-                       location = st.nextToken();
-                       String[] data= {id,id,location};
-                       wr.model2.addRow(data);
+                       String[] data={
+                    		myid,
+       						st.nextToken(),//ID
+       						st.nextToken()//location
+       					 };
+       					 wr.model2.addRow(data);
                     }
                        
                    break;
-                  case Function.CHAT:
+                  case Function.WAITCHAT:
                     {
                        id=st.nextToken();
                        chat=st.nextToken();
-                        wr.ta.append("["+id+"]  "+chat+"\n");
+                        wr.ta.append(id+" "+chat+"\n");
                     }
                     break;
                     
@@ -147,3 +141,6 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable{
       }
       
 }
+
+
+

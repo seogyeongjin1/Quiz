@@ -1,9 +1,8 @@
-package server;
+/*package server;
 import java.util.*;// Vector(클라이언트 정보)
 import java.net.*;// ServerSocket(서버=교환) , Socket(클라이언트와 통신)
 import java.io.*;// OutputStream(byte),BufferedReader(char)
 import common.*;// 기능 번호 
-import server.Server1.Client;
 public class Server implements Runnable{
     // 저장공간 (클라이언트 정보 저장)
     ArrayList<Client> wait=new ArrayList<Client>();
@@ -35,7 +34,7 @@ public class Server implements Runnable{
                System.out.println(s.getPort());
                
                Client client=new Client(s);
-               wait.add(client);
+               //wait.add(client);
                client.start();// 통신시작 
          }
       }catch(Exception ex) {}
@@ -82,24 +81,23 @@ public class Server implements Runnable{
                {
                case Function.LOGIN:
                     {
-                       // 로그인 => 입력받는다 
-                       id=st.nextToken();
-                       location = "대기중";
-
-                       //wait.add(this);
-                       // 이미 접속된 사람들에게 전송 => 로그인하고 있는 사람 
-                       messageAll(Function.LOGIN+"|"
-                          +id+"|"+location);
-                       System.out.println("메세지 보냈다");
-                       // 저장
-                        
-                       // 상대방의 정보를 본인 받는다 
-                       //messageTo(Function.MYLOG+"|");
-                       //  대기실 갱신 
-                       for(Client client:wait)
-                       {
-                          messageTo(Function.MYLOG +"|"
-                                +client.id + "|"+client.location); 
+                     id=st.nextToken();
+   					 name=st.nextToken();
+   					 location="대기실";
+   					 // 접속한 모든 사람에게 로그인을 알려준다(테이블에 출력)
+   					 messageAll(Function.LOGIN+"|"+id+"|"+name+"|"+location);
+   					 // 본인은 추가하지 않는다 
+   					 // 본인을 추가 
+   					 wait.add(this);
+   					 // 1. 로그인 ==> 대기실로 변경 
+   					 //messageTo(Function.MYLOG+"|"+id);
+   					 // 2. 접속자 명단을 전송 
+   					 for(Client client:wait)
+   					 {
+   						 messageTo(Function.MYLOG+"|"
+   								+client.id+"|"
+   								+client.name+"|"
+   								+client.location);
                        }
                     }
                    break;
@@ -183,3 +181,4 @@ public class Server implements Runnable{
    }
 
 }
+*/
