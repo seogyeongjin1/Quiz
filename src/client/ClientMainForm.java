@@ -41,7 +41,7 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable{
 	     mv.b1.addActionListener(this); //로그인버튼
 	     wr.tf.addActionListener(this);
 	     
-	     setDefaultCloseOperation(EXIT_ON_CLOSE);
+	     setDefaultCloseOperation(EXIT_ON_CLOSE); // 종료시 메모리 삭제
 	}
 	
 	
