@@ -167,7 +167,7 @@ public class Server implements Runnable{
     				  {
     					  String id = st.nextToken();
     					  String chat=st.nextToken();
-    					  messageAll(Function.WAITCHAT+"|["+id+"]| "+chat);
+    					  messageAll(Function.GAMECHAT+"|["+id+"]| "+chat);
     				  }
     				  break;
     				}
