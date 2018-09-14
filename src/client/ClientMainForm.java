@@ -120,7 +120,7 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable{
      			if(rname.trim().length()<1)
      			{
      				// 입력이 안된 상태
-     				JOptionPane.showMessageDialog(this, "방이름을 입력하세요");
+     				JOptionPane.showMessageDialog(this, "방이름을 입력하세요"); 
      				nr.wnp.roomName.requestFocus();
      				return;
      			}
