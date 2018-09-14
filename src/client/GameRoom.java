@@ -9,7 +9,7 @@ public class GameRoom extends JPanel implements Runnable{
    Munje mj = new Munje();
    JProgressBar pb1;
    JButton b1,b2,b3;
-   JLabel la1,la2,la3,la4,la5,la6,la7,la8,la9,la10,la11,la12,la13,la14,la15,po1,po2,po3,po4,po5,score;
+   JLabel la1,la2,la4,la5,la7,la8,la10,la11,la13,la14,po1,po2,po3,po4,po5,score;
    JTextField tf1,tf2,tf3,tf4,tf5;
    JTextArea ta;
    JTextField tf;
@@ -33,45 +33,30 @@ public class GameRoom extends JPanel implements Runnable{
       la2=new JLabel();
       la2.setOpaque(true);
       la2.setBackground(Color.black);
-      la3=new JLabel();
-      la3.setOpaque(true);
-      la3.setBackground(Color.black);
-      la4=new JLabel();
+     la4=new JLabel();
       la4.setOpaque(true);
       la4.setBackground(Color.black);
       la5=new JLabel();
       la5.setOpaque(true);
       la5.setBackground(Color.black);
-      la6=new JLabel();
-      la6.setOpaque(true);
-      la6.setBackground(Color.black);
       la7=new JLabel();
       la7.setOpaque(true);
       la7.setBackground(Color.black);
       la8=new JLabel();
       la8.setOpaque(true);
       la8.setBackground(Color.black);
-      la9=new JLabel();
-      la9.setOpaque(true);
-      la9.setBackground(Color.black);
       la10=new JLabel();
       la10.setOpaque(true);
       la10.setBackground(Color.black);
       la11=new JLabel();
       la11.setOpaque(true);
       la11.setBackground(Color.black);
-      la12=new JLabel();
-      la12.setOpaque(true);
-      la12.setBackground(Color.black);
       la13=new JLabel();
       la13.setOpaque(true);
       la13.setBackground(Color.black);
       la14=new JLabel();
       la14.setOpaque(true);
       la14.setBackground(Color.black);
-      la15=new JLabel();
-      la15.setOpaque(true);
-      la15.setBackground(Color.black);
       po1=new JLabel(new ImageIcon("Image\\po1.png"));
       po1.setOpaque(true);
       po1.setBackground(Color.black);
@@ -111,30 +96,25 @@ public class GameRoom extends JPanel implements Runnable{
       setLayout(null);
       // null 직접 배치
       la1.setBounds(70, 115, 130,30);
-      la2.setBounds(70, 162, 130,30);
-      la3.setBounds(70, 211, 130,30);
+      la2.setBounds(70, 162, 130,79);
      
       tf1.setBounds(650, 750, 275, 30);
       
       la4.setBounds(1385, 116, 130, 30);
       tf2.setBounds(1390, 60, 170, 30); 
-      la5.setBounds(1385, 163, 130, 30);
-      la6.setBounds(1385, 213, 130, 30);
+      la5.setBounds(1385, 163, 130, 79);
       
       la7.setBounds(70, 346, 130, 30);
       tf3.setBounds(250, 330, 170, 30);
-      la8.setBounds(70, 393, 130, 30);
-      la9.setBounds(70, 441, 130, 30);
+      la8.setBounds(70, 393, 130, 79);
       
       la10.setBounds(1385, 346, 130, 30);
       tf4.setBounds(1390, 330, 170, 30);
-      la11.setBounds(1385, 393, 130, 30);
-      la12.setBounds(1385, 442, 130, 30);
+      la11.setBounds(1385, 393, 130, 79);
       
       la13.setBounds(70, 586, 130, 30);
       tf5.setBounds(40, 800, 170, 30);
-      la14.setBounds(70, 633, 130, 30);
-      la15.setBounds(70, 681, 130, 30);
+      la14.setBounds(70, 633, 130, 79);
       
       po1.setBounds(230,90,150,150);
       po2.setBounds(1213,92,150,150);
@@ -152,27 +132,20 @@ public class GameRoom extends JPanel implements Runnable{
       add(la2);
       //add(tf2);
       
-      add(la3);
-      //add(tf3);
-      
       add(la4);
       //add(tf4);
       
       add(la5);
       //add(tf5);
-      add(la6);
       
       add(la7);
       add(la8);
-      add(la9);
       
       add(la10);
       add(la11);
-      add(la12);
       
       add(la13);
       add(la14);
-      add(la15);
       
       add(po1);
       add(po2);
