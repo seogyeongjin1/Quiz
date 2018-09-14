@@ -120,7 +120,7 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable{
      			if(rname.trim().length()<1)
      			{
      				// 입력이 안된 상태
-     				JOptionPane.showMessageDialog(this, "방이름을 입력하세요");
+     				JOptionPane.showMessageDialog(this, "방이름을 입력하세요"); 
      				nr.wnp.roomName.requestFocus();
      				return;
      			}
@@ -131,7 +131,7 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable{
      				temp=wr.model1.getValueAt(i, 0).toString();
      				if(temp.equals(rname))
      				{
-     					JOptionPane.showMessageDialog(this, "이미 존재하는 방입니다\n다시 입력하세요");// 중복체크
+     					JOptionPane.showMessageDialog(this, "이미 존재하는 방입니다\n다시 입력하세요");// 중복체크 
      					nr.wnp.roomName.setText("");
      					nr.wnp.roomName.requestFocus();
      					return;

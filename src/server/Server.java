@@ -167,7 +167,7 @@ public class Server implements Runnable{
     				  {
     					  String id = st.nextToken();
     					  String chat=st.nextToken();
-    					  messageAll(Function.WAITCHAT+"|["+id+"]| "+chat);
+    					  messageAll(Function.GAMECHAT+"|["+id+"]| "+chat);
     				  }
     				  break;
     				}
@@ -180,7 +180,7 @@ public class Server implements Runnable{
     	//  전체 전송하는 메세지
     	public void messageAll(String msg)
     	{
-    		try
+    		try 
     		{
     			for(Client client:waitList)
     			{
