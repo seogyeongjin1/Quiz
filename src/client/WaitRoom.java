@@ -30,7 +30,7 @@ public class WaitRoom extends JPanel{
        bar= js3.getVerticalScrollBar();
        tf=new JTextField();
        tf2=new JTextField();
-       
+         
        p1=new JPanel();
        p1.setOpaque(false);
        p2=new JPanel();
