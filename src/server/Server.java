@@ -180,7 +180,7 @@ public class Server implements Runnable{
     	//  전체 전송하는 메세지
     	public void messageAll(String msg)
     	{
-    		try
+    		try 
     		{
     			for(Client client:waitList)
     			{
