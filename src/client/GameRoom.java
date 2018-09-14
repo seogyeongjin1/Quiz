@@ -88,6 +88,7 @@ public class GameRoom extends JPanel implements Runnable{
       
       ta=new JTextArea();
       JScrollPane js=new JScrollPane(ta);
+      ta.setEditable(false);
       tf=new JTextField();
       
       
