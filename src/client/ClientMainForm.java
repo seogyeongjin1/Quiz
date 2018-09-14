@@ -65,14 +65,8 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable{
                    return;
                
             try
-<<<<<<< HEAD
             {
                s=new Socket("211.238.142.60", 7777);
-=======
-            {
-            	s=new Socket("211.238.142.60", 7777);
-
->>>>>>> branch 'master' of https://github.com/seogyeongjin1/Quiz.git
 
                in=new BufferedReader(new InputStreamReader(s.getInputStream()));
                   // byte ==> 2byte
