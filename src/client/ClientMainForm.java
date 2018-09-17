@@ -32,7 +32,7 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable{
        
        add("MV",mv); //로그인창
        add("MF",wr); //대기실창
-       add("GR",gr); //게임창
+       add("GR",gr); 
            
        
         setSize(1600,900);
@@ -66,7 +66,7 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable{
                
             try
             {
-               s=new Socket("211.238.142.60", 7777);
+               s=new Socket("211.238.142.60", 7890);
 
                in=new BufferedReader(new InputStreamReader(s.getInputStream()));
                   // byte ==> 2byte
@@ -194,7 +194,15 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable{
                         wr.bar.setValue(wr.bar.getMaximum());
                     }
                     break;
-                    
+                  case Function.GAMECHAT:
+                  {
+                     id=st.nextToken();
+                     chat=st.nextToken();
+                     
+                      wr.ta.append(id+" "+chat+"\n");
+                      wr.bar.setValue(gr.bar.getMaximum());
+                  }
+                  break;
                }
             }
          }catch(Exception ex){}
