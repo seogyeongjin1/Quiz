@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.table.*;
-public class GameRoom extends JPanel implements Runnable{
+public class GameRoom extends JPanel implements Runnable,ActionListener{
    Munje mj = new Munje();
    JProgressBar pb1;
    JButton b1,b2,b3;
@@ -16,7 +16,8 @@ public class GameRoom extends JPanel implements Runnable{
    JScrollBar bar;
    JPanel gp;
    Image back,munje;
-   int a;
+   int a,jumsu;
+   String dapin;
    GameRoom()
    {
 	   
@@ -26,6 +27,8 @@ public class GameRoom extends JPanel implements Runnable{
          b1=new JButton(new ImageIcon("Image\\ready.png"));
          b2=new JButton(new ImageIcon("Image\\start.png"));
          b3=new JButton(new ImageIcon("Image\\wait_exit2.png")); // 클래스 초기화
+         
+         tf1.addActionListener(this);
       
             
          
@@ -244,9 +247,12 @@ public class GameRoom extends JPanel implements Runnable{
 					Thread.sleep(100);
 				else			// 답 관한 쓰레드
 					Thread.sleep(20);
-				
-				
 			}catch(Exception ex) {}
+			
+			if(dapin.equals(dap[i]))
+			{
+				jumsu+=(100-a);
+			}
 			
 			
 			if(a==100) //프로그래스바가 다 찼을 때
@@ -270,10 +276,19 @@ public class GameRoom extends JPanel implements Runnable{
 					// 서버 점수 전송 
 					break;
 				}
-
 			}
 			a++;
-			
+		}
+	}
+
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getSource()==tf1)
+		{
+			dapin=tf1.getText();
 		}
 	}
 }
