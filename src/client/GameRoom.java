@@ -19,7 +19,7 @@ public class GameRoom extends JPanel implements Runnable,ActionListener{
    int a,jumsu;
    String dapin;
    GameRoom()
-   {
+   { 
 	   
       back=Toolkit.getDefaultToolkit().getImage("Image\\3.jpg");
       munje=Toolkit.getDefaultToolkit().getImage(mj.dapimg[0]);
