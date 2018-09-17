@@ -161,6 +161,10 @@ public class Server1 implements Runnable{
     					  messageAll(Function.WAITCHAT+"|["+id+"]| "+chat);
     				  }
     				  break;
+    				  
+    				  
+    				  
+    				  
     				}
     			}
     		}catch(Exception ex){}

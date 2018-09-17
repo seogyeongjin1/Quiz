@@ -4,8 +4,9 @@ import java.awt.*;
 import javax.swing.table.*;
 import java.awt.event.*;
 public class WaitRoom extends JPanel{
-    JLabel la1,la2,lanum1,lanum2,lasoo1,lasoo2,law1,law2, latitle1, latitle2, la3;
+    //JLabel la1,la2,lanum1,lanum2,lasoo1,lasoo2,law1,law2, latitle1, latitle2, la3;
     JTable table1,table2;
+    JLabel la1,la2,la3;
     DefaultTableModel model1,model2;
     JTextArea ta;
     JTextField tf,tf2;
@@ -13,8 +14,28 @@ public class WaitRoom extends JPanel{
     Image back, wait;
     JScrollBar bar;
     JPanel p1,p2,p3,p4,p5,p6;
+    JLabel latitle1=new JLabel("");
+    JLabel latitle2=new JLabel("");
+    JLabel latitle3=new JLabel("");
+    JLabel latitle4=new JLabel("");
+    JLabel latitle5=new JLabel("");
+    JLabel latitle6=new JLabel("");
     
+    JLabel lanum1=new JLabel("");
+    JLabel lanum2=new JLabel("");
+    JLabel lanum3=new JLabel("");
+    JLabel lanum4=new JLabel("");
+    JLabel lanum5=new JLabel("");
+    JLabel lanum6=new JLabel("");
     
+    JLabel lasoo1=new JLabel("");
+    JLabel lasoo2=new JLabel("");
+    JLabel lasoo3=new JLabel("");
+    JLabel lasoo4=new JLabel("");
+    JLabel lasoo5=new JLabel("");
+    JLabel lasoo6=new JLabel("");
+    JLabel[] latitle={latitle1,latitle2,latitle3,latitle4,latitle5,latitle6};
+    //JLabel[] lasoo={}
     WaitRoom()
     {
        
@@ -109,8 +130,8 @@ public class WaitRoom extends JPanel{
        lanum2= new JLabel("002");
        lasoo1= new JLabel(a+"/"+b);
        lasoo2= new JLabel(a+"/"+b);
-       law1 = new JLabel("WAITING");
-       law2 = new JLabel("PLAYING");
+       //law1 = new JLabel("WAITING");
+       //law2 = new JLabel("PLAYING");
        latitle1 = new JLabel("초보만 달려요 ㄱㄱ~");
        latitle2 = new JLabel("제발 고수만~ 못하면 오지마");
 
@@ -137,7 +158,7 @@ public class WaitRoom extends JPanel{
        add(lasoo2);*/
        
        
-       law1.setBounds(200, 150, 200, 50);
+      /* law1.setBounds(200, 150, 200, 50);
        law1.setForeground(Color.blue);
        law1.setOpaque(false);
        law1.setFont(new Font("Serif", Font.BOLD, 40));
@@ -148,7 +169,7 @@ public class WaitRoom extends JPanel{
        law2.setBounds(650, 150, 200, 50);
        law2.setFont(new Font("Serif", Font.BOLD, 40));
        law2.setForeground(Color.blue);
-       add(law2);
+       add(law2);*/
        
        
        latitle1.setBounds( 275, 95, 250, 40);

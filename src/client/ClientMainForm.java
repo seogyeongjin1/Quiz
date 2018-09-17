@@ -66,7 +66,7 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable{
                
             try
             {
-               s=new Socket("211.238.142.63", 7777);
+               s=new Socket("211.238.142.64", 7777);
 
                in=new BufferedReader(new InputStreamReader(s.getInputStream()));
                   // byte ==> 2byte
@@ -103,7 +103,7 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable{
  			
  			// 다시 방만들기를 할 때마다 메모리 초기화
  			
- 			nr.setLocation(250, 190);// 방만들기 창이 뜨는 위치 설정
+ 			nr.setLocation(650, 250);// 방만들기 창이 뜨는 위치 설정
  			nr.setSize(600, 500);
  			nr.setVisible(true);
          }
@@ -124,8 +124,8 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable{
      				nr.wnp.roomName.requestFocus();
      				return;
      			}
-     			
-     			String temp="";
+     			    			
+     			/*String temp="";
      			for(int i=0;i<wr.model1.getRowCount();i++)
      			{
      				temp=wr.model1.getValueAt(i, 0).toString();
@@ -136,7 +136,14 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable{
      					nr.wnp.roomName.requestFocus();
      					return;
      				}
-     			}
+     				else
+         			{
+         				card.show(getContentPane(), "GR");
+         			}
+         			
+     			}*/
+     			
+     			
         	 
         	// 서버로 전송
  			try
@@ -194,6 +201,8 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable{
                         wr.bar.setValue(wr.bar.getMaximum());
                     }
                     break;
+                    
+                    
                     
                }
             }
