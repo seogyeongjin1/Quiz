@@ -35,8 +35,8 @@ public class Server implements Runnable{
 	private ServerSocket ss;
 	private final int PORT=7777;
 	// 클라이언트 정보를 저장 
-	ArrayList<Client> waitList=
-			   new ArrayList<Client>();
+	Vector<Client> waitVc=
+			   new Vector<Client>();
 	Vector<Room> roomVc=new Vector<Room>();
 	// 클라이언트의 IP,id....
 	public Server()// 프로그램에서 시작과 동시 수행 : 생성자,main
@@ -132,11 +132,11 @@ public class Server implements Runnable{
     					 messageAll(Function.LOGIN+"|"+id+"|"+pos);
     					 // 본인은 추가하지 않는다 
     					 // 본인을 추가 
-    					 waitList.add(this);
+    					 waitVc.addElement(this);
     					 // 1. 로그인 ==> 대기실로 변경 
     					 //messageTo(Function.MYLOG+"|"+id);
     					 // 2. 접속자 명단을 전송 
-    					 for(Client client:waitList)
+    					 for(Client client:waitVc)
     					 {
     						 messageTo(Function.MYLOG+"|"
     								+client.id+"|"
@@ -162,8 +162,8 @@ public class Server implements Runnable{
 									st.nextToken(),
 									st.nextToken(), 
 									Integer.parseInt(st.nextToken()));
-							room.userVC.add(this);
-							pos="게임중";
+							room.userVC.addElement(this);
+							pos="게임준비중";
 							roomVc.addElement(room);
 							messageAll(Function.MAKEROOM+"|"
 							           +room.roomName+"|"
@@ -185,8 +185,33 @@ public class Server implements Runnable{
 						}
 						break;
 						
-						
-						
+    				  case Function.GAMESTART: //게임시작
+    				  {
+    					  String rn=st.nextToken(); //룸네임 받아오기
+    					  int roompos=Integer.parseInt(st.nextToken()); //룸위치 지정
+    					  pos = "게임중";
+    					  for(int i=0;i<roomVc.size();i++)
+							{    						  
+								Room room=roomVc.elementAt(i);
+								
+								if(rn.equals(room.roomName))
+								{
+									
+									for(int j=0;j<room.userVC.size();j++)
+									{
+										Client user=room.userVC.elementAt(j);
+										user.messageTo(Function.GAMESTART+"|"
+											+roompos);
+										user.messageTo(Function.GAMECHAT
+												+"게임을 시작합니다");
+										
+										messageAll(Function.WAITUPDATE+"|"
+												+user.id+"|"+user.pos);
+									}
+								}							
+							}
+    				  }
+					  break;
     				  /*case Function.MYROOMIN:
 						{
 							
@@ -339,7 +364,7 @@ public class Server implements Runnable{
     	{
     		try 
     		{
-    			for(Client client:waitList)
+    			for(Client client:waitVc)
     			{
     				client.messageTo(msg);
     			}

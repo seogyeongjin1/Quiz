@@ -130,7 +130,7 @@ public class WaitRoom extends JPanel{
 
        lasoo1.setBounds(65, 565, 100, 30);
        lasoo1.setForeground(Color.black);
-       lasoo1.setOpaque(false);
+       lasoo1.setOpaque(true);
        lasoo1.setBorder(javax.swing.BorderFactory.createEmptyBorder());
        add(lasoo1);
        
