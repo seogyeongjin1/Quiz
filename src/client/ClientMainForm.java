@@ -48,7 +48,6 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
         nr.wnp.noButton.addActionListener(this);
         nr.wnp.okButton.addActionListener(this);
         gr.b2.addActionListener(this);
-        gr.tf1.addActionListener(this);
         
         setDefaultCloseOperation(EXIT_ON_CLOSE);
    }
@@ -72,7 +71,7 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
                
             try
             {
-               s=new Socket("211.238.142.64", 7777);
+               s=new Socket("211.238.142.63", 7777);
 
                in=new BufferedReader(new InputStreamReader(s.getInputStream()));
                   // byte ==> 2byte
@@ -303,7 +302,7 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
                       }
                 	  score = 0;
                 	  new Thread(gr).start(); //게임룸 쓰레드 시작
-                	  gr.score.setText(score+"");
+                	  //gr.score.setText(score+"");
                   }
                   break;
                    

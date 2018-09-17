@@ -202,7 +202,7 @@ public class Server implements Runnable{
 										Client user=room.userVC.elementAt(j);
 										user.messageTo(Function.GAMESTART+"|"
 											+roompos);
-										user.messageTo(Function.GAMECHAT
+										user.messageTo(Function.GAMECHAT+"|"
 												+"게임을 시작합니다");
 										
 										messageAll(Function.WAITUPDATE+"|"
