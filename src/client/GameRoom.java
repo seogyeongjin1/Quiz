@@ -249,9 +249,10 @@ public class GameRoom extends JPanel implements Runnable,ActionListener{
 					Thread.sleep(20);
 			}catch(Exception ex) {}
 			
-			if(dapin.equals(dap[i]))
+			if(dapin.equals(mj.dap[i]))
 			{
 				jumsu+=(100-a);
+				score.setText(jumsu+"");
 			}
 			
 			
