@@ -4,9 +4,8 @@ import java.awt.*;
 import javax.swing.table.*;
 import java.awt.event.*;
 public class WaitRoom extends JPanel{
-    //JLabel la1,la2,lanum1,lanum2,lasoo1,lasoo2,law1,law2, latitle1, latitle2, la3;
+    JLabel la1,la2,lanum1,lanum2,lasoo1,lasoo2,law1,law2, latitle1, latitle2, la3;
     JTable table1,table2;
-    JLabel la1,la2,la3;
     DefaultTableModel model1,model2;
     JTextArea ta;
     JTextField tf,tf2;
@@ -14,28 +13,7 @@ public class WaitRoom extends JPanel{
     Image back, wait;
     JScrollBar bar;
     JPanel p1,p2,p3,p4,p5,p6;
-    JLabel latitle1=new JLabel("");
-    JLabel latitle2=new JLabel("");
-    JLabel latitle3=new JLabel("");
-    JLabel latitle4=new JLabel("");
-    JLabel latitle5=new JLabel("");
-    JLabel latitle6=new JLabel("");
-    
-    JLabel lanum1=new JLabel("");
-    JLabel lanum2=new JLabel("");
-    JLabel lanum3=new JLabel("");
-    JLabel lanum4=new JLabel("");
-    JLabel lanum5=new JLabel("");
-    JLabel lanum6=new JLabel("");
-    
-    JLabel lasoo1=new JLabel("");
-    JLabel lasoo2=new JLabel("");
-    JLabel lasoo3=new JLabel("");
-    JLabel lasoo4=new JLabel("");
-    JLabel lasoo5=new JLabel("");
-    JLabel lasoo6=new JLabel("");
-    JLabel[] latitle={latitle1,latitle2,latitle3,latitle4,latitle5,latitle6};
-    //JLabel[] lasoo={}
+    JLabel[] rmt,rmn,rmw;
     WaitRoom()
     {
        
@@ -75,12 +53,12 @@ public class WaitRoom extends JPanel{
        model2=new DefaultTableModel(row1, col1);
        table2=new JTable(model2)
        {
-    	   @Override
-			public boolean isCellEditable(int row, int column) 
-    	   {
-				// TODO Auto-generated method stub
-				return false;
-    	   }
+          @Override
+         public boolean isCellEditable(int row, int column) 
+          {
+            // TODO Auto-generated method stub
+            return false;
+          }
        };
        table2.getTableHeader().setReorderingAllowed(false); // 셀 이동불가
        table2.getTableHeader().setResizingAllowed(false);   // 셀 크기 조절 불가
@@ -126,14 +104,18 @@ public class WaitRoom extends JPanel{
        //la1,la2,lanum1,lanum2,lasoo1,lasoo2,law1,law2, latitle1, latitle2;
        int a=1;
        int b=5;
-       lanum1= new JLabel("001");
-       lanum2= new JLabel("002");
-       lasoo1= new JLabel(a+"/"+b);
-       lasoo2= new JLabel(a+"/"+b);
-       //law1 = new JLabel("WAITING");
-       //law2 = new JLabel("PLAYING");
-       latitle1 = new JLabel("초보만 달려요 ㄱㄱ~");
-       latitle2 = new JLabel("제발 고수만~ 못하면 오지마");
+       lanum1= new JLabel(" ");
+       lanum2= new JLabel(" ");
+       lasoo1= new JLabel(" ");
+       lasoo2= new JLabel(" ");
+       law1 = new JLabel(" ");
+       law2 = new JLabel(" ");
+       latitle1 = new JLabel(" ");
+       latitle2 = new JLabel(" ");
+      
+       JLabel[] rmt = {latitle1, latitle2};
+       JLabel[] rmn = {lanum1, lanum2};
+       JLabel[] rmw = {law1, law2};
 
        
        lanum1.setBounds( 215, 100, 100, 30);
@@ -146,7 +128,7 @@ public class WaitRoom extends JPanel{
        lanum2.setForeground(Color.black);
        add(lanum2);
 
-       /*lasoo1.setBounds(65, 565, 100, 30);
+       lasoo1.setBounds(65, 565, 100, 30);
        lasoo1.setForeground(Color.black);
        lasoo1.setOpaque(false);
        lasoo1.setBorder(javax.swing.BorderFactory.createEmptyBorder());
@@ -155,10 +137,10 @@ public class WaitRoom extends JPanel{
        
        lasoo2.setBounds(65, 565, 100, 30);
        lasoo2.setForeground(Color.black);
-       add(lasoo2);*/
+       add(lasoo2);
        
        
-      /* law1.setBounds(200, 150, 200, 50);
+       law1.setBounds(200, 150, 200, 50);
        law1.setForeground(Color.blue);
        law1.setOpaque(false);
        law1.setFont(new Font("Serif", Font.BOLD, 40));
@@ -169,7 +151,7 @@ public class WaitRoom extends JPanel{
        law2.setBounds(650, 150, 200, 50);
        law2.setFont(new Font("Serif", Font.BOLD, 40));
        law2.setForeground(Color.blue);
-       add(law2);*/
+       add(law2);
        
        
        latitle1.setBounds( 275, 95, 250, 40);
@@ -217,7 +199,7 @@ public class WaitRoom extends JPanel{
       // TODO Auto-generated method stub
       try
       {
-    	  //UIManager.setLookAndFeel("com.jtattoo.plaf.mint.MintLookAndFeel");
+         //UIManager.setLookAndFeel("com.jtattoo.plaf.mint.MintLookAndFeel");
       }catch(Exception ex) {} //예외처리
         WaitRoom wr=new WaitRoom();
    }
