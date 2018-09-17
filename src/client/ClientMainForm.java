@@ -22,7 +22,10 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
    Socket s;
     BufferedReader in;//  서버
     OutputStream out;// 서버 
-    String myid,msg,id,chat,location;
+    String myid,msg,id,chat,location,rname;
+    int rmpos; //게임룸 생성위치
+    boolean gms;
+    int score;
    
    
    public ClientMainForm()
@@ -44,6 +47,8 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
         wr.p1.addMouseListener(this);
         nr.wnp.noButton.addActionListener(this);
         nr.wnp.okButton.addActionListener(this);
+        gr.b2.addActionListener(this);
+        gr.tf1.addActionListener(this);
         
         setDefaultCloseOperation(EXIT_ON_CLOSE);
    }
@@ -75,7 +80,7 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
                out.write((Function.LOGIN+"|"+myid+"\n").getBytes()); //내아이디 날려주기
             }catch(Exception ex) {}
             new Thread(this).start();
-            card.show(getContentPane(), "MF");
+            
          }
          
          if(e.getSource()==wr.tf)
@@ -116,63 +121,76 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
          else if(e.getSource()==nr.wnp.okButton)
          {
             {
-              // 입력된 방 정보를 읽기
-               wr.rmt = new JLabel[]{wr.latitle1,
-                                    wr.latitle2
-                                  /*lanum3.equals(""),
-                                lanum4.equals(""),
-                               lanum5.equals(""),
-                               lanum6.equals("")*/
-                                };
-               
-               
-              String rname=nr.wnp.roomName.getText();
-              if(rname.trim().length()<1)
-              {
-                 // 입력이 안된 상태
-                 JOptionPane.showMessageDialog(this, "방이름을 입력하세요"); 
-                 nr.wnp.roomName.setText("");
-                 nr.wnp.roomName.requestFocus();
-                 return;
-              }
-              
-              //방 중복 검사
-              String temp="";
-              for(int i=0; i<wr.rmt.length ;i++)
-              {
-                 System.out.println(wr.rmt[i].getText());
-                 if((wr.rmt[i].getText()).equals(" ")) continue;  //방위치 확인 (0~5)
-                 
-                 temp=wr.rmt[i].getText();
-                 if(temp.equals(rname))
-                 {
-                    JOptionPane.showMessageDialog(this, "이미 존재하는 방입니다\n다시 입력하세요");// 중복체크 
-                    nr.wnp.roomName.setText(" ");
-                    nr.wnp.roomName.requestFocus();
-                    return;
-                 }
-              }
-              
-              int rmpos = 1;//방정보를 넣을 방위치 선정
-              for(int i=0; i<wr.rmt.length ;i++)
-              {
-                 if((wr.rmt[i].getText()).equals(" ")) break;//방위치 확인 (0~5)
-                 
-                 else
-                    rmpos++; //방정보를 넣을 방위치 선정
-              }
-            
-           
-           int inwon=nr.wnp.personnel_Combo.getSelectedIndex()+2;
-           // 서버로 전송
-          try
-          {
-             out.write((Function.MAKEROOM+"|"+rname+"|"+rmpos+"|"+inwon+"\n").getBytes());
-          }catch(Exception ex) {}
-          
-          nr.setVisible(false);// 서버로 값을 보내고 사라지게 만든다
+	              // 입력된 방 정보를 읽기
+	               wr.rmt = new JLabel[]{wr.latitle1,
+	                                    wr.latitle2
+	                                  /*lanum3.equals(""),
+	                                lanum4.equals(""),
+	                               lanum5.equals(""),
+	                               lanum6.equals("")*/
+	                                };
+	               
+	               
+	              rname=nr.wnp.roomName.getText();
+	              if(rname.trim().length()<1)
+	              {
+	                 // 입력이 안된 상태
+	                 JOptionPane.showMessageDialog(this, "방이름을 입력하세요"); 
+	                 nr.wnp.roomName.setText("");
+	                 nr.wnp.roomName.requestFocus();
+	                 return;
+	              }
+	              
+	              //방 중복 검사
+	              String temp="";
+	              for(int i=0; i<wr.rmt.length ;i++)
+	              {
+	                 System.out.println(wr.rmt[i].getText());
+	                 if((wr.rmt[i].getText()).equals(" ")) continue;  //방위치 확인 (0~5)
+	                 
+	                 temp=wr.rmt[i].getText();
+	                 if(temp.equals(rname))
+	                 {
+	                    JOptionPane.showMessageDialog(this, "이미 존재하는 방입니다\n다시 입력하세요");// 중복체크 
+	                    nr.wnp.roomName.setText("");
+	                    nr.wnp.roomName.requestFocus();
+	                    return;
+	                 }
+	              }
+	              
+	              int rmpos = 1;//방정보를 넣을 방위치 선정
+	              for(int i=0; i<wr.rmt.length ;i++)
+	              {
+	                 if((wr.rmt[i].getText()).equals(" ")) break;//방위치 확인 (0~5)
+	                 
+	                 else
+	                    rmpos++; //방정보를 넣을 방위치 선정
+	              }
+	            
+	           
+	           int inwon=nr.wnp.personnel_Combo.getSelectedIndex()+2;
+	           // 서버로 전송
+	          try
+	          {
+	             out.write((Function.MAKEROOM+"|"+rname+"|"+rmpos+"|"+inwon+"\n").getBytes());
+	          }catch(Exception ex) {}
+	          
+	          nr.setVisible(false);// 서버로 값을 보내고 사라지게 만든다
+	         }
          }
+         else if(e.getSource()==gr.b2)
+         {
+        	 
+        	 try
+	          {
+	             out.write((Function.GAMESTART+"|"+rname+"|"+rmpos+"\n").getBytes());
+	          }catch(Exception ex) {} 
          }
+         
+        /* else if(e.getSource()==gr.tf1)
+         {
+        	 
+         }*/
       }
        
       public void run()
@@ -191,6 +209,8 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
                                 wr.lanum2};
                wr.rmw = new JLabel[]{wr.law1,
                               wr.law2};
+               
+               
                // 100|id|name|sex
                String msg=in.readLine();//out.write()
                int rmpos;
@@ -220,6 +240,7 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
                          st.nextToken()//location // 대기실
                        };
                        wr.model2.addRow(data);
+                       card.show(getContentPane(), "MF");
                     }
                        
                    break;
@@ -267,8 +288,24 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
                    }
                   }
                   break;
-                   
-                   
+                  
+                  //게임시작
+                  case Function.GAMESTART:
+                  {
+                	  rmpos=Integer.parseInt(st.nextToken());
+                	  if(rmpos==1)
+                      {
+                         wr.rmw[rmpos-1].setText("PLAYING");
+                      }
+                      else if(rmpos==2)
+                      {
+                         wr.rmw[rmpos-1].setText("PLAYING");
+                      }
+                	  score = 0;
+                	  new Thread(gr).start(); //게임룸 쓰레드 시작
+                	  gr.score.setText(score+"");
+                  }
+                  break;
                    
                    
                    

@@ -16,11 +16,12 @@ public class GameRoom extends JPanel implements Runnable{
    JScrollBar bar;
    JPanel gp;
    Image back,munje;
-   
+   int a;
    GameRoom()
    {
-      back=Toolkit.getDefaultToolkit().getImage("Image\\3.png");
-      munje=Toolkit.getDefaultToolkit().getImage(mj.dap[0]);
+	   
+      back=Toolkit.getDefaultToolkit().getImage("Image\\3.jpg");
+      munje=Toolkit.getDefaultToolkit().getImage(mj.dapimg[0]);
       // 초기값
          b1=new JButton(new ImageIcon("Image\\ready.png"));
          b2=new JButton(new ImageIcon("Image\\start.png"));
@@ -30,7 +31,7 @@ public class GameRoom extends JPanel implements Runnable{
          
       la1=new JLabel();
       la1.setOpaque(true);
-      la1.setBackground(Color.black);
+      la1.setBackground(Color.white);
       la2=new JLabel();
       la2.setOpaque(true);
       la2.setBackground(Color.black);
@@ -74,7 +75,7 @@ public class GameRoom extends JPanel implements Runnable{
       po5.setOpaque(true);
       po5.setBackground(Color.black);
       
-      score=new JLabel("1000"); 
+      score=new JLabel("0"); 
       score.setBackground(Color.black);
       score.setFont(new Font("휴먼매직체", Font.BOLD, 55));
       score.setForeground(Color.YELLOW);
@@ -192,11 +193,11 @@ public class GameRoom extends JPanel implements Runnable{
       //add(gp);
       
       // 윈도우 크기 결정
-      setSize(1600, 900);
-      setVisible(true);
+      //setSize(1600, 900);
+      //setVisible(true);
       
       //setDefaultCloseOperation(EXIT_ON_CLOSE); // 프로그램 종료
-      new Thread(this).start();
+      //new Thread(this).start();
    }
    
 
@@ -223,13 +224,14 @@ public class GameRoom extends JPanel implements Runnable{
   //그림교체 화면
     public void setdap(int i)
     {
-    	munje=Toolkit.getDefaultToolkit().getImage(mj.dap[i]);
+    	munje=Toolkit.getDefaultToolkit().getImage(mj.dapimg[i]);
     	repaint();
     }
 	@Override
-	public void run() {
+	public void run() 
+	{
 		// TODO Auto-generated method stub
-		int a=0;
+		a=0;
 		int i=0;
 		boolean check = false; //true면 문제에 관한거(문제시간, 문제 변경); false면 (답시간, 답사진변경)
 
@@ -242,6 +244,8 @@ public class GameRoom extends JPanel implements Runnable{
 					Thread.sleep(100);
 				else			// 답 관한 쓰레드
 					Thread.sleep(20);
+				
+				
 			}catch(Exception ex) {}
 			
 			

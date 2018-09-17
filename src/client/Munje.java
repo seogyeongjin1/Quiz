@@ -1,6 +1,7 @@
 package client;
 
-public class Munje {
+public class Munje 
+{
 	String[] mun={
 			   "",
 			   "Image\\gameImage\\김다미.jpg",
@@ -34,7 +35,8 @@ public class Munje {
 			   "Image\\gameImage\\홍진영.jpg"
 			   };
 	   
-	   String[] dap={
+	   String[] dapimg=
+		   {
 			   "Image\\loginback.jpg",
 			   "Image\\gameImage\\김다미원본.jpg",
 			   "Image\\gameImage\\디오원본.PNG",
@@ -64,5 +66,32 @@ public class Munje {
 			   "Image\\gameImage\\하성운원본.jpg",
 			   "Image\\gameImage\\한지민원본.jpg",
 			   "Image\\gameImage\\헨리원본.jpg",
-			   "Image\\gameImage\\홍진영원본.jpg"};
+			   "Image\\gameImage\\홍진영원본.jpg"
+		   };
+	   
+	   
+	   String[] dap=
+		   {
+			   "",
+			   "",
+			   "",
+			   "",
+			   "",
+			   "",
+			   "",
+			   "",
+			   "",
+			   "",
+			   "",
+			   "",
+			   "",
+			   "",
+			   "",
+			   "",
+			   "",
+			   "",
+			   "",
+			   ""
+	   		};
 }
+
