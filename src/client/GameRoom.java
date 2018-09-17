@@ -13,6 +13,7 @@ public class GameRoom extends JPanel implements Runnable{
    JTextField tf1,tf2,tf3,tf4,tf5;
    JTextArea ta;
    JTextField tf;
+   JScrollBar bar;
    JPanel gp;
    Image back,munje;
    
@@ -90,7 +91,7 @@ public class GameRoom extends JPanel implements Runnable{
       JScrollPane js=new JScrollPane(ta);
       ta.setEditable(false);
       tf=new JTextField();
-      
+      bar= js.getVerticalScrollBar();
       
       
       // 배치
@@ -167,8 +168,10 @@ public class GameRoom extends JPanel implements Runnable{
       add(pb1);
       
       //채팅창 설정
+      Color color = new Color(0,0,0);
       js.setBounds(1200, 540, 350, 200); // 채팅창
       add(js);
+      js.setForeground(color);
       // div {x:10 y:10}
       tf.setBounds(1200, 750, 350, 30); // 채팅
       add(tf);
@@ -200,7 +203,9 @@ public class GameRoom extends JPanel implements Runnable{
 
    public static void main(String[] args) {
       // TODO Auto-generated method stub
-      new GameRoom();
+	 	   GameRoom gr=new GameRoom();
+	
+     
       
    }
    // 스킨입힐때
