@@ -18,7 +18,7 @@ public class GameRoom extends JPanel implements Runnable{
    
    GameRoom()
    {
-      back=Toolkit.getDefaultToolkit().getImage("Image\\3.jpg");
+      back=Toolkit.getDefaultToolkit().getImage("Image\\3.png");
       munje=Toolkit.getDefaultToolkit().getImage(mj.dap[0]);
       // �ʱⰪ
          b1=new JButton(new ImageIcon("Image\\ready.png"));

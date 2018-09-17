@@ -6,7 +6,7 @@ public class Function {
    //방관련 메세지
    public static final int MYLOG=110;// 로그인하는 사람들
    public static final int MAKEROOM=200;// 방만들기
-   public static final int ROOMIN=210;//방들어가기
+   public static final int MYROOMIN=210;//방들어가기
    public static final int ROOMOUT=220;//방나가기(남아있는 사람)
    public static final int MYROOMOUT=230;//방나가는 사람 처리
    public static final int WAITUPDATE=240;//대기실 수정

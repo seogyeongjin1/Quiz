@@ -13,8 +13,7 @@ public class WaitRoom extends JPanel{
     Image back, wait;
     JScrollBar bar;
     JPanel p1,p2,p3,p4,p5,p6;
-    
-    
+    JLabel[] rmt,rmn,rmw;
     WaitRoom()
     {
        
@@ -105,14 +104,18 @@ public class WaitRoom extends JPanel{
        //la1,la2,lanum1,lanum2,lasoo1,lasoo2,law1,law2, latitle1, latitle2;
        int a=1;
        int b=5;
-       lanum1= new JLabel("001");
-       lanum2= new JLabel("002");
-       lasoo1= new JLabel(a+"/"+b);
-       lasoo2= new JLabel(a+"/"+b);
-       law1 = new JLabel("WAITING");
-       law2 = new JLabel("PLAYING");
-       latitle1 = new JLabel("초보만 달려요 ㄱㄱ~");
-       latitle2 = new JLabel("제발 고수만~ 못하면 오지마");
+       lanum1= new JLabel(" ");
+       lanum2= new JLabel(" ");
+       lasoo1= new JLabel(" ");
+       lasoo2= new JLabel(" ");
+       law1 = new JLabel(" ");
+       law2 = new JLabel(" ");
+       latitle1 = new JLabel(" ");
+       latitle2 = new JLabel(" ");
+      
+       JLabel[] rmt = {latitle1, latitle2};
+       JLabel[] rmn = {lasoo1, lasoo2};
+       JLabel[] rmw = {law1, law2};
 
        
        lanum1.setBounds( 215, 100, 100, 30);
@@ -125,7 +128,7 @@ public class WaitRoom extends JPanel{
        lanum2.setForeground(Color.black);
        add(lanum2);
 
-       /*lasoo1.setBounds(65, 565, 100, 30);
+       lasoo1.setBounds(65, 565, 100, 30);
        lasoo1.setForeground(Color.black);
        lasoo1.setOpaque(false);
        lasoo1.setBorder(javax.swing.BorderFactory.createEmptyBorder());
@@ -134,7 +137,7 @@ public class WaitRoom extends JPanel{
        
        lasoo2.setBounds(65, 565, 100, 30);
        lasoo2.setForeground(Color.black);
-       add(lasoo2);*/
+       add(lasoo2);
        
        
        law1.setBounds(200, 150, 200, 50);
