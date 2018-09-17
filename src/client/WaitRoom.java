@@ -23,12 +23,13 @@ public class WaitRoom extends JPanel{
        la2=new JLabel("채팅방");
        la3=new JLabel("접속자 정보");
        ta=new JTextArea();
-       JScrollPane js3=new JScrollPane(ta);       
+       JScrollPane js3=new JScrollPane(ta);
+       ta.setEditable(false);
        
        bar= js3.getVerticalScrollBar();
        tf=new JTextField();
        tf2=new JTextField();
-       
+         
        p1=new JPanel();
        p1.setOpaque(false);
        p2=new JPanel();
