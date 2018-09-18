@@ -203,7 +203,7 @@ public class Server implements Runnable{
 										user.messageTo(Function.GAMESTART+"|"
 											+roompos);
 										user.messageTo(Function.GAMECHAT+"|"+id+"|"
-												+"=====게임 START!!=====");
+												+"======================\n===== 게임 START!! =====\n======================");
 										
 										messageAll(Function.WAITUPDATE+"|"
 												+user.id+"|"+user.pos);
