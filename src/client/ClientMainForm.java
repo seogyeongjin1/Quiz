@@ -249,6 +249,7 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
                      rname=st.nextToken();
                      rmpos=Integer.parseInt(st.nextToken());
                      rmstate = st.nextToken();
+                     gr.la1.setText(myid);
                      
                      if(rmpos==1)
                      {
@@ -292,6 +293,7 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
                   case Function.GAMESTART:
                   {
                 	  rmpos=Integer.parseInt(st.nextToken());
+                	  chat=st.nextToken();
                 	  if(rmpos==1)
                       {
                          wr.rmw[rmpos-1].setText("PLAYING");
@@ -302,6 +304,7 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
                       }
                 	  score = 0;
                 	  gr.ta.append(chat+"\n");
+                	  gr.bar.setValue(gr.bar.getMaximum());
                 	  new Thread(gr).start(); //게임룸 쓰레드 시작
                 	  //gr.score.setText(score+"");
                   }
