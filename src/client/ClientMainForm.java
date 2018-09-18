@@ -44,6 +44,7 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
         mv.b1.addActionListener(this); //로그인버튼
         wr.tf.addActionListener(this);
         wr.b7.addActionListener(this);
+        wr.b8.addActionListener(this); //로그아웃 버튼
         wr.p1.addMouseListener(this);
         nr.wnp.noButton.addActionListener(this);
         nr.wnp.okButton.addActionListener(this);
@@ -177,6 +178,13 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
 	          nr.setVisible(false);// 서버로 값을 보내고 사라지게 만든다
 	         }
          }
+         else if(e.getSource()==wr.b8)
+  		 {
+  			try
+  			{
+  				out.write((Function.LOGOUT+"|\n").getBytes());
+  			}catch(Exception ex){}
+  		 }
          else if(e.getSource()==gr.b2)
          {
         	 
@@ -332,6 +340,29 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
                       gr.bar.setValue(gr.bar.getMaximum());
                   }
                   break;
+                //로그아웃 시 대기방 처리
+                  case Function.LOGOUT:
+				    {
+				    	String id=st.nextToken();
+				    	String temp="";
+				    	for(int i=0;i<wr.model2.getRowCount();i++)
+				    	{
+				    		temp=wr.model2.getValueAt(i, 0).toString();
+				    		if(id.equals(temp))
+				    		{
+				    			wr.model2.removeRow(i);
+				    			break;
+				    		}
+				    	}
+				    }
+				  break;
+                  //로그아웃 본인
+                  case Function.MYLOGOUT:
+                  	{
+				    	dispose();
+				    	System.exit(0);
+                  	}
+				  break; 
                }
             }
          }catch(Exception ex){}

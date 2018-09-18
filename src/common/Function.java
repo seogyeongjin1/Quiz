@@ -25,4 +25,5 @@ public class Function {
    public static final int WAITCHAT=400;//채팅하기
    public static final int GAMECHAT=410;//채팅하기
    public static final int LOGOUT=500;//게임종료
+   public static final int MYLOGOUT=510;
 } 
