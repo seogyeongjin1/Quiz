@@ -301,6 +301,7 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
                          wr.rmw[rmpos-1].setText("PLAYING");
                       }
                 	  score = 0;
+                	  gr.ta.append(chat+"\n");
                 	  new Thread(gr).start(); //게임룸 쓰레드 시작
                 	  //gr.score.setText(score+"");
                   }
@@ -324,8 +325,8 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
                      id=st.nextToken();
                      chat=st.nextToken();
                      
-                      wr.ta.append(id+" "+chat+"\n");
-                      wr.bar.setValue(gr.bar.getMaximum());
+                      gr.ta.append(id+" "+chat+"\n");
+                      gr.bar.setValue(gr.bar.getMaximum());
                   }
                   break;
                }

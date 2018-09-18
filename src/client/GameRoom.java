@@ -284,14 +284,15 @@ public class GameRoom extends JPanel implements Runnable{
 
 
 
-	/*@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource()==tf1)
 		{
 			dapin=tf1.getText();
+			tf1.setText("");
+			tf1.requestFocus();
 		}
-	}*/
+	}
 }
       
       
