@@ -32,14 +32,12 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
    {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
        setLayout(card);
        
-       add("MV",mv); //로그인창
-       add("MF",wr); //대기실창
-       add("GR",gr); 
-           
-       
-        setSize(1600,900);
-        setVisible(true);
-        setResizable(false);
+       add("MV",mv); //로그인창 MainView
+       add("MF",wr); //대기실창 MainForm
+       add("GR",gr); //게임창    GameRoom
+       setSize(1600,900);
+       setVisible(true);    // ㅇ
+       setResizable(false); // 사이즈 조정 [x]
         
         mv.b1.addActionListener(this); //로그인버튼
         wr.tf.addActionListener(this);
@@ -48,6 +46,7 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
         nr.wnp.noButton.addActionListener(this);
         nr.wnp.okButton.addActionListener(this);
         gr.b2.addActionListener(this);
+        gr.tf1.addActionListener(this);
         
         setDefaultCloseOperation(EXIT_ON_CLOSE);
    }
@@ -120,75 +119,75 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
          else if(e.getSource()==nr.wnp.okButton)
          {
             {
-	              // 입력된 방 정보를 읽기
-	               wr.rmt = new JLabel[]{wr.latitle1,
-	                                    wr.latitle2
-	                                  /*lanum3.equals(""),
-	                                lanum4.equals(""),
-	                               lanum5.equals(""),
-	                               lanum6.equals("")*/
-	                                };
-	               
-	               
-	              rname=nr.wnp.roomName.getText();
-	              if(rname.trim().length()<1)
-	              {
-	                 // 입력이 안된 상태
-	                 JOptionPane.showMessageDialog(this, "방이름을 입력하세요"); 
-	                 nr.wnp.roomName.setText("");
-	                 nr.wnp.roomName.requestFocus();
-	                 return;
-	              }
-	              
-	              //방 중복 검사
-	              String temp="";
-	              for(int i=0; i<wr.rmt.length ;i++)
-	              {
-	                 System.out.println(wr.rmt[i].getText());
-	                 if((wr.rmt[i].getText()).equals(" ")) continue;  //방위치 확인 (0~5)
-	                 
-	                 temp=wr.rmt[i].getText();
-	                 if(temp.equals(rname))
-	                 {
-	                    JOptionPane.showMessageDialog(this, "이미 존재하는 방입니다\n다시 입력하세요");// 중복체크 
-	                    nr.wnp.roomName.setText("");
-	                    nr.wnp.roomName.requestFocus();
-	                    return;
-	                 }
-	              }
-	              
-	              int rmpos = 1;//방정보를 넣을 방위치 선정
-	              for(int i=0; i<wr.rmt.length ;i++)
-	              {
-	                 if((wr.rmt[i].getText()).equals(" ")) break;//방위치 확인 (0~5)
-	                 
-	                 else
-	                    rmpos++; //방정보를 넣을 방위치 선정
-	              }
-	            
-	           
-	           int inwon=nr.wnp.personnel_Combo.getSelectedIndex()+2;
-	           // 서버로 전송
-	          try
-	          {
-	             out.write((Function.MAKEROOM+"|"+rname+"|"+rmpos+"|"+inwon+"\n").getBytes());
-	          }catch(Exception ex) {}
-	          
-	          nr.setVisible(false);// 서버로 값을 보내고 사라지게 만든다
-	         }
+                 // 입력된 방 정보를 읽기
+                  wr.rmt = new JLabel[]{wr.latitle1,
+                                       wr.latitle2
+                                     /*lanum3.equals(""),
+                                   lanum4.equals(""),
+                                  lanum5.equals(""),
+                                  lanum6.equals("")*/
+                                   };
+                  
+                  
+                 rname=nr.wnp.roomName.getText();
+                 if(rname.trim().length()<1)
+                 {
+                    // 입력이 안된 상태
+                    JOptionPane.showMessageDialog(this, "방이름을 입력하세요"); 
+                    nr.wnp.roomName.setText("");
+                    nr.wnp.roomName.requestFocus();
+                    return;
+                 }
+                 
+                 //방 중복 검사
+                 String temp="";
+                 for(int i=0; i<wr.rmt.length ;i++)
+                 {
+                    System.out.println(wr.rmt[i].getText());
+                    if((wr.rmt[i].getText()).equals(" ")) continue;  //방위치 확인 (0~5)
+                    
+                    temp=wr.rmt[i].getText();
+                    if(temp.equals(rname))
+                    {
+                       JOptionPane.showMessageDialog(this, "이미 존재하는 방입니다\n다시 입력하세요");// 중복체크 
+                       nr.wnp.roomName.setText("");
+                       nr.wnp.roomName.requestFocus();
+                       return;
+                    }
+                 }
+                 
+                 int rmpos = 1;//방정보를 넣을 방위치 선정
+                 for(int i=0; i<wr.rmt.length ;i++)
+                 {
+                    if((wr.rmt[i].getText()).equals(" ")) break;//방위치 확인 (0~5)
+                    
+                    else
+                       rmpos++; //방정보를 넣을 방위치 선정
+                 }
+               
+              
+              int inwon=nr.wnp.personnel_Combo.getSelectedIndex()+2;
+              // 서버로 전송
+             try
+             {
+                out.write((Function.MAKEROOM+"|"+rname+"|"+rmpos+"|"+inwon+"\n").getBytes());
+             }catch(Exception ex) {}
+             
+             nr.setVisible(false);// 서버로 값을 보내고 사라지게 만든다
+            }
          }
          else if(e.getSource()==gr.b2)
          {
-        	 
-        	 try
-	          {
-	             out.write((Function.GAMESTART+"|"+rname+"|"+rmpos+"\n").getBytes());
-	          }catch(Exception ex) {} 
+            
+            try
+             {
+                out.write((Function.GAMESTART+"|"+rname+"|"+rmpos+"\n").getBytes());
+             }catch(Exception ex) {} 
          }
          
         /* else if(e.getSource()==gr.tf1)
          {
-        	 
+            
          }*/
       }
        
@@ -249,7 +248,6 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
                      rname=st.nextToken();
                      rmpos=Integer.parseInt(st.nextToken());
                      rmstate = st.nextToken();
-                     gr.la1.setText(myid);
                      
                      if(rmpos==1)
                      {
@@ -292,9 +290,8 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
                   //게임시작
                   case Function.GAMESTART:
                   {
-                	  rmpos=Integer.parseInt(st.nextToken());
-                	  chat=st.nextToken();
-                	  if(rmpos==1)
+                     rmpos=Integer.parseInt(st.nextToken());
+                     if(rmpos==1)
                       {
                          wr.rmw[rmpos-1].setText("PLAYING");
                       }
@@ -302,11 +299,9 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
                       {
                          wr.rmw[rmpos-1].setText("PLAYING");
                       }
-                	  score = 0;
-                	  gr.ta.append(chat+"\n");
-                	  gr.bar.setValue(gr.bar.getMaximum());
-                	  new Thread(gr).start(); //게임룸 쓰레드 시작
-                	  //gr.score.setText(score+"");
+                     score = 0;
+                     new Thread(gr).start(); //게임룸 쓰레드 시작
+                     gr.score.setText(score+"");
                   }
                   break;
                    
@@ -328,8 +323,8 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
                      id=st.nextToken();
                      chat=st.nextToken();
                      
-                      gr.ta.append(id+" "+chat+"\n");
-                      gr.bar.setValue(gr.bar.getMaximum());
+                      wr.ta.append(id+" "+chat+"\n");
+                      wr.bar.setValue(gr.bar.getMaximum());
                   }
                   break;
                }
@@ -381,5 +376,4 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
    }
       
 }
-
 

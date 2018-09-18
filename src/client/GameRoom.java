@@ -16,19 +16,16 @@ public class GameRoom extends JPanel implements Runnable{
    JScrollBar bar;
    JPanel gp;
    Image back,munje;
-   int a,jumsu;
-   String dapin;
+   int a;
    GameRoom()
-   { 
-	   
+   {
+      
       back=Toolkit.getDefaultToolkit().getImage("Image\\3.jpg");
       munje=Toolkit.getDefaultToolkit().getImage(mj.dapimg[0]);
       // 초기값
          b1=new JButton(new ImageIcon("Image\\ready.png"));
          b2=new JButton(new ImageIcon("Image\\start.png"));
          b3=new JButton(new ImageIcon("Image\\wait_exit2.png")); // 클래스 초기화
-         
-         //tf1.addActionListener(this);
       
             
          
@@ -207,8 +204,8 @@ public class GameRoom extends JPanel implements Runnable{
 
    public static void main(String[] args) {
       // TODO Auto-generated method stub
-	 	   GameRoom gr=new GameRoom();
-	
+          GameRoom gr=new GameRoom();
+   
      
       
    }
@@ -221,78 +218,64 @@ public class GameRoom extends JPanel implements Runnable{
     //그림교체 화면
     public void setmunje(int i)
     {
-    	munje=Toolkit.getDefaultToolkit().getImage(mj.mun[i]);
-    	repaint();
+       munje=Toolkit.getDefaultToolkit().getImage(mj.mun[i]);
+       repaint();
     }
   //그림교체 화면
     public void setdap(int i)
     {
-    	munje=Toolkit.getDefaultToolkit().getImage(mj.dapimg[i]);
-    	repaint();
+       munje=Toolkit.getDefaultToolkit().getImage(mj.dapimg[i]);
+       repaint();
     }
-	@Override
-	public void run() 
-	{
-		// TODO Auto-generated method stub
-		a=0;
-		int i=0;
-		boolean check = false; //true면 문제에 관한거(문제시간, 문제 변경); false면 (답시간, 답사진변경)
+   @Override
+   public void run() 
+   {
+      // TODO Auto-generated method stub
+      a=0;
+      int i=0;
+      boolean check = false; //true면 문제에 관한거(문제시간, 문제 변경); false면 (답시간, 답사진변경)
 
-		while(true)
-		{
-			pb1.setValue(a);
-			try
-			{
-				if(check==true) // 문제 관한 쓰레드
-					Thread.sleep(100);
-				else			// 답 관한 쓰레드
-					Thread.sleep(20);
-				
-				if(dapin.equals(mj.dap[i]))
-				{
-					jumsu+=(100-a);
-					score.setText(jumsu+"");
-				}
-			}catch(Exception ex) {}
-			
-			
-			if(a==100) //프로그래스바가 다 찼을 때
-			{
-				a=0; //프로그래스바 초기화
-				if(check==true) 
-				{
-					setdap(i);  //답 그림 세팅
-					check=false;
-				}
-				else
-				{
-					i++;
-					setmunje(i); //문제 그림 세팅
-					check=true;
-				}
-				
-				if(i==10)
-				{
-					// 게임 끝
-					// 서버 점수 전송 
-					break;
-				}
-			}
-			a++;
-		}
-	}
+      while(true)
+      {
+         pb1.setValue(a);
+         try
+         {
+            if(check==true) // 문제 관한 쓰레드
+               Thread.sleep(100);
+            else         // 답 관한 쓰레드
+               Thread.sleep(20);
+            
+            
+         }catch(Exception ex) {}
+         
+         
+         if(a==100) //프로그래스바가 다 찼을 때
+         {
+            a=0; //프로그래스바 초기화
+            if(check==true) 
+            {
+               setdap(i);  //답 그림 세팅
+               check=false;
+            }
+            else
+            {
+               i++;
+               setmunje(i); //문제 그림 세팅
+               check=true;
+            }
+            
+            if(i==10)
+            {
+               // 게임 끝
+               // 서버 점수 전송 
+               break;
+            }
 
-
-	
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		if(e.getSource()==tf1)
-		{
-			dapin=tf1.getText();
-			tf1.setText("");
-			tf1.requestFocus();
-		}
-	}
+         }
+         a++;
+         
+      }
+   }
 }
       
       
