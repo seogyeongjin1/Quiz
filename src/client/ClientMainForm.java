@@ -62,7 +62,7 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
 
    @Override
       public void actionPerformed(ActionEvent e) 
-   	  {
+   {
          // TODO Auto-generated method stub
          
          if(e.getSource()==mv.b1) //로그인버튼
@@ -309,6 +309,7 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
                   {
                 	  rmpos=Integer.parseInt(st.nextToken());
                 	  if(rmpos==1)
+
                       {
                          wr.rmw[rmpos-1].setText("PLAYING");
                       }
@@ -332,37 +333,37 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
                   }
                   break;
                    
-                   
+              
                   case Function.ROOMADD:
 				    {
 				    	id=st.nextToken();
 
-				    	for(int i=0;i<5;i++)
-				    	{
-				    		if(gr.sw[i]==false)
-				    		{
-				    			gr.sw[i]=true;
-				    			gr.idla[i].setText(id);
-				    			break;
-				    		}
-				    	}
-				    }
-				    break;
+                   for(int i=0;i<5;i++)
+                   {
+                      if(gr.sw[i]==false)
+                      {
+                         gr.sw[i]=true;
+                         gr.idla[i].setText(id);
+                         break;
+                      }
+                   }
+                }
+                break;
                   
                   case Function.MYROOMIN:
-				    {
-				    	card.show(getContentPane(), "GR");
-				    }
-				    break;
+                {
+                   card.show(getContentPane(), "GR");
+                }
+                break;
                   
                   case Function.ROOMUP:
                   {
-                	  rmpos=Integer.parseInt(st.nextToken());
-                	  rmstate = st.nextToken();
-                	  
-                	  if(rmpos==1)
+                     rmpos=Integer.parseInt(st.nextToken());
+                     rmstate = st.nextToken();
+                     
+                     if(rmpos==1)
                       {
-                		  wr.rmn[rmpos-1].setText(rmstate);
+                        wr.rmn[rmpos-1].setText(rmstate);
                       }
                       else if(rmpos==2)
                       {
@@ -422,6 +423,7 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
 
    @Override
    public void mouseClicked(MouseEvent e) {
+
       // TODO Auto-generated method stub
 	   wr.rmt = new JLabel[]{
                
@@ -438,6 +440,7 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
       if(e.getSource()==wr.p1)                     // 화면넘기기
          {
             if(!s1.equals(" "))
+
             {
             	rmpos=1;
 	            try
@@ -445,6 +448,7 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
 	               System.out.println(s1 + "방위치가 어딘지? "+rmpos);
 	               out.write((Function.MYROOMIN+"|"+myid+"|"+s1+"|"+rmpos+"\n").getBytes());
 	            }catch(Exception ex) {} 
+
             }
          }
       else if(e.getSource()==wr.p2)                     // 화면넘기기

@@ -161,6 +161,7 @@ public class Server implements Runnable{
                   // 방만들기
                   case Function.MAKEROOM:
                   {
+
                      // 데이터 받기
                 	  rn = st.nextToken(); //방제
                       rmpos = Integer.parseInt(st.nextToken()); //방위치
@@ -196,8 +197,10 @@ public class Server implements Runnable{
                   
                   case Function.MYROOMIN:
                   {
+
                 	 id=st.nextToken();  //아이디 
                      rn=st.nextToken();  //방제목
+
                      int roompos=Integer.parseInt(st.nextToken()); //방위치
                      for(int i=0;i<roomVc.size();i++)  //만들어진 방만큼 반복
                      {
@@ -205,7 +208,7 @@ public class Server implements Runnable{
                         if(rn.equals(room.roomName))  //보내온 방제랑 일치하는지 확인
                         {
                            //방제가 일치
-                        	
+
                            
                            room.current++;  //방에 있는 현재원
                            pos="게임준비중"; 
@@ -216,9 +219,9 @@ public class Server implements Runnable{
                               
                               user.messageTo(Function.ROOMADD+"|"+id);//내가 확보한 위치 상대방에게 전달하기
                               
+
                               System.out.println(id + "가 입장했다고 게임채팅창에 출력");
                               user.messageTo(Function.GAMECHAT +"|"+"[알림 ☞]  " + id + "|"+"님이 입장하셨습니다");//입장메세지
-                            		 
                            }
                            
                            // 방에 들어가는 사람 처리
@@ -253,7 +256,6 @@ public class Server implements Runnable{
                   }
                   break;
                   
-                  
                   case Function.GAMESTART: //게임시작
                   {
                      rn=st.nextToken(); //룸네임 받아오기
@@ -264,6 +266,7 @@ public class Server implements Runnable{
                         Room room=roomVc.elementAt(i);
                         
                         if(rn.equals(room.roomName))  //방제가 일치하는지 확인
+
                         {	
                            for(int j=0;j<room.userVC.size();j++) // 방에 들어와있는 인원만큼 반복
                            {
@@ -372,9 +375,4 @@ public class Server implements Runnable{
        
     }
 }
-
-
-
-
-
 

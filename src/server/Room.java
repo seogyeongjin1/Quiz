@@ -9,10 +9,10 @@ public class Room {
     static Vector<Server.Client> userVC=new Vector<Server.Client>();
     public Room(String rn,int rmp, int max)
     {
-    	roomName=rn;
-    	roomPosition=rmp;
-    	//roomPwd=rp;
-    	maxcount=max;
-    	current=1;
+       roomName=rn;
+       roomPosition=rmp;
+       //roomPwd=rp;
+       maxcount=max;
+       current=1;
     }
 }
