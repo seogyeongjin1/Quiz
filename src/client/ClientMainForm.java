@@ -43,6 +43,7 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
         mv.b1.addActionListener(this); //로그인버튼
         wr.tf.addActionListener(this);
         wr.b7.addActionListener(this);
+        wr.b8.addActionListener(this);
         wr.p1.addMouseListener(this);
         nr.wnp.noButton.addActionListener(this);
         nr.wnp.okButton.addActionListener(this);
@@ -59,7 +60,8 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
    }
 
    @Override
-      public void actionPerformed(ActionEvent e) {
+      public void actionPerformed(ActionEvent e) 
+   	  {
          // TODO Auto-generated method stub
          
          if(e.getSource()==mv.b1) //로그인버튼
@@ -189,6 +191,14 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
          {
             
          }*/
+         
+         if(e.getSource()==wr.b8)
+         {
+           try
+           {
+              out.write((Function.LOGOUT+"|\n").getBytes());
+           }catch(Exception ex){}
+         }
       }
        
       public void run()
@@ -366,6 +376,29 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
                       gr.bar.setValue(gr.bar.getMaximum());
                   }
                   break;
+                  
+                  case Function.LOGOUT:
+                  {
+                     String id=st.nextToken();
+                     String temp="";
+                     for(int i=0;i<wr.model2.getRowCount();i++)
+                     {
+                        temp=wr.model2.getValueAt(i, 0).toString();
+                        if(id.equals(temp))
+                        {
+                           wr.model2.removeRow(i);
+                           break;
+                        }
+                     }
+                  }
+                break;
+                  //로그아웃 본인
+                  case Function.MYLOGOUT:
+                  {
+                    	 dispose();
+                    	 System.exit(0);
+                  }
+                  break; 
                }
             }
          }catch(Exception ex){}

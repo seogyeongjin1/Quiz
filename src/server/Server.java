@@ -356,6 +356,24 @@ public class Server implements Runnable{
                      messageAll(Function.GAMECHAT+"|["+id+"]| "+chat);
                   }
                   break;
+                  
+                  case Function.LOGOUT:
+                  {
+                     messageAll(Function.LOGOUT+"|"+id);
+                     messageTo(Function.MYLOGOUT+"|");
+                     for(int i=0;i<waitVc.size();i++)
+                     {
+                        Client user=waitVc.elementAt(i);
+                        if(id.equals(user.id))
+                        {
+                           waitVc.removeElementAt(i);
+                           in.close();
+                           out.close();
+                           break;
+                        }
+                     }
+                  }
+                  break;
                 }
              }
           }catch(Exception ex){}
