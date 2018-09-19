@@ -162,7 +162,7 @@ public class Server implements Runnable{
                   case Function.MAKEROOM:
                   {
                      // 데이터 받기
-                     rn = st.nextToken(); //방제
+                	  rn = st.nextToken(); //방제
                       rmpos = Integer.parseInt(st.nextToken()); //방위치
                      Room room=new Room(
                            rn,
@@ -194,7 +194,7 @@ public class Server implements Runnable{
                   
                   case Function.MYROOMIN:
                   {
-                    String id=st.nextToken();  //아이디 
+                	 String id=st.nextToken();  //아이디 
                      String rn=st.nextToken();  //방제목
                      int roompos=Integer.parseInt(st.nextToken()); //방위치
                      for(int i=0;i<roomVc.size();i++)  //만들어진 방만큼 반복
@@ -203,8 +203,8 @@ public class Server implements Runnable{
                         if(rn.equals(room.roomName))  //보내온 방제랑 일치하는지 확인
                         {
                            //방제가 일치
-                           
-                           
+                        	
+                        	
                            room.current++;  //방에 있는 현재원
                            pos="게임준비중"; 
                            // 방에 있는 사람 처리
@@ -216,7 +216,7 @@ public class Server implements Runnable{
                               
                               
                               user.messageTo(Function.GAMECHAT  //입장메세지
-                                   +"|[알림 ☞]"+id+" |님이 입장하셨습니다");
+                            		 +"|[알림 ☞]"+id+" |님이 입장하셨습니다");
                            }
                            // 방에 들어가는 사람 처리
                            room.userVC.add(this);   //들어온 방,유저정보에 내 정보 추가
@@ -252,20 +252,20 @@ public class Server implements Runnable{
                   {
                      
                          방찾는다
-                            현재인원 증가
-                            위치 변경
+                         	현재인원 증가
+                         	위치 변경
                          ==========
-                            방에 있는 사람 
+                         	방에 있는 사람 
                            => 방에 들어가는 사람의 정보 전송
                            => 입장메세지 
-                            방에 들어가는 사람 처리
+                         	방에 들어가는 사람 처리
                            => 방으로 변경
                            => 방에 있는 사람의 모든 정보를 받는다 
-                            대기실 처리
+                         	대기실 처리
                            => 1) 인원 (table1)
                               2) 위치 (table2)
                               
-                            강퇴 , 초대 , 게임 
+                         	강퇴 , 초대 , 게임 
                       
                      String rn=st.nextToken();
                      for(int i=0;i<roomVc.size();i++)
@@ -320,7 +320,7 @@ public class Server implements Runnable{
                         Room room=roomVc.elementAt(i);
                         
                         if(rn.equals(room.roomName))  //방제가 일치하는지 확인
-                        {   
+                        {	
                            for(int j=0;j<room.userVC.size();j++) // 방에 들어와있는 인원만큼 반복
                            {
                               Client user=room.userVC.elementAt(j); 
