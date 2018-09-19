@@ -48,6 +48,7 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
         nr.wnp.noButton.addActionListener(this);
         nr.wnp.okButton.addActionListener(this);
         gr.b2.addActionListener(this);
+        gr.tf.addActionListener(this);
         
         setDefaultCloseOperation(EXIT_ON_CLOSE);
    }
@@ -187,10 +188,21 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
              }catch(Exception ex) {} 
          }
          
-        /* else if(e.getSource()==gr.tf1)
+         else if(e.getSource()==gr.tf)
          {
-            
-         }*/
+        	 chat=gr.tf.getText();
+             if(chat.trim().length()<1)
+             {
+                gr.tf.setText("");
+                return;
+             }
+        	 try
+             {
+        		 out.write((Function.GAMECHAT+"|"+myid+"|"+chat+"\n").getBytes());
+        		 gr.tf.setText("");
+                 gr.tf.requestFocus();
+             }catch(Exception ex){}
+         }
          
          if(e.getSource()==wr.b8)
          {
@@ -217,6 +229,9 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
                                 wr.lanum2};
                wr.rmw = new JLabel[]{wr.law1,
                               wr.law2};
+               
+               gr.idla = new JLabel[]{gr.la1,gr.la4,gr.la7,gr.la10,gr.la13};
+               
                
                
                // 100|id|name|sex
@@ -258,7 +273,6 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
                      rname=st.nextToken();
                      rmpos=Integer.parseInt(st.nextToken());
                      rmstate = st.nextToken();
-                     gr.la1.setText(myid); 
                      if(rmpos==1)
                      {
                         wr.rmt[rmpos-1].setText(rname);
@@ -321,7 +335,7 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
                    
                   case Function.ROOMADD:
 				    {
-				    	String id=st.nextToken();
+				    	id=st.nextToken();
 
 				    	for(int i=0;i<5;i++)
 				    	{

@@ -18,8 +18,8 @@ public class GameRoom extends JPanel implements Runnable{
    Image back,munje;
    int a,jumsu,i;
    String dapin;
+   JLabel[] idla;
    boolean[] sw=new boolean[5];
-   JLabel[] idla = {la1,la4,la7,la10,la13};
    GameRoom()
    { 
       
@@ -79,6 +79,8 @@ public class GameRoom extends JPanel implements Runnable{
       po5=new JLabel(new ImageIcon("Image\\po5.png"));
       po5.setOpaque(true);
       po5.setBackground(Color.black);
+      JLabel[] idla ={la1,la4,la7,la10,la13};
+      
       
       score=new JLabel("0"); 
       score.setBackground(Color.black);
