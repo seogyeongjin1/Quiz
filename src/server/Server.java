@@ -31,49 +31,49 @@ import java.io.*;
  */
 public class Server implements Runnable{
     // 서버 소켓 생성 
-	private ServerSocket ss;
-	private final int PORT=7777;
-	// 클라이언트 정보를 저장 
-	Vector<Client> waitVc=
-			   new Vector<Client>();
-	Vector<Room> roomVc=new Vector<Room>();
-	// 클라이언트의 IP,id....
-	public Server()// 프로그램에서 시작과 동시 수행 : 생성자,main
-	{
-		// 서버 ==> 구동할때 한개 컴퓨터에서 두번을 실행 할 수 없다
-		try
-		{
-			ss=new ServerSocket(PORT);
-			// 생성자 ==> bind():개통 , listen(): 대기 
-			System.out.println("Server Start...");
-		}catch(Exception ex) 
-		{
-			System.out.println(ex.getMessage());
-		}
-	}
-	// 접속했을때 처리하는 기능 
-	public void run()
-	{
-		try
-		{
-			// 클라이언트의 발신자 IP확인 ==> Socket
-			while(true)
-			{
-			   // Socket s==> 접속한 클라이언트의 정보(IP,PORT)
-			   Socket s=ss.accept();// 클라이언트가 접속시에만 호출 
-			   Client client=new Client(s);
-			   // 쓰레드와 클라이언트의 통신이 시작된다 
-			   client.start();
-			}
-		}catch(Exception ex){}
-	}
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		Server server=new Server();
+   private ServerSocket ss;
+   private final int PORT=7777;
+   // 클라이언트 정보를 저장 
+   Vector<Client> waitVc=
+            new Vector<Client>();
+   Vector<Room> roomVc=new Vector<Room>();
+   // 클라이언트의 IP,id....
+   public Server()// 프로그램에서 시작과 동시 수행 : 생성자,main
+   {
+      // 서버 ==> 구동할때 한개 컴퓨터에서 두번을 실행 할 수 없다
+      try
+      {
+         ss=new ServerSocket(PORT);
+         // 생성자 ==> bind():개통 , listen(): 대기 
+         System.out.println("Server Start...");
+      }catch(Exception ex) 
+      {
+         System.out.println(ex.getMessage());
+      }
+   }
+   // 접속했을때 처리하는 기능 
+   public void run()
+   {
+      try
+      {
+         // 클라이언트의 발신자 IP확인 ==> Socket
+         while(true)
+         {
+            // Socket s==> 접속한 클라이언트의 정보(IP,PORT)
+            Socket s=ss.accept();// 클라이언트가 접속시에만 호출 
+            Client client=new Client(s);
+            // 쓰레드와 클라이언트의 통신이 시작된다 
+            client.start();
+         }
+      }catch(Exception ex){}
+   }
+   public static void main(String[] args) {
+      // TODO Auto-generated method stub
+      Server server=new Server();
         new Thread(server).start();
-	}
-	
-	// 통신 준비 ==> 내부 클래스 
+   }
+   
+   // 통신 준비 ==> 내부 클래스 
     class Client extends Thread
     {
     	// 로그인시 전송하는 데이터 id,name
@@ -397,10 +397,8 @@ public class Server implements Runnable{
     			out.write((msg+"\n").getBytes());
     		}catch(Exception ex){}
     	}
-    	
     }
 }
-
 
 
 
