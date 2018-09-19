@@ -1,5 +1,4 @@
 package client;
-import java.awt.CardLayout;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.*;
@@ -32,22 +31,22 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
    {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
        setLayout(card);
        
-       add("MV",mv); //로그인창 MainView
-       add("MF",wr); //대기실창 MainForm
-       add("GR",gr); //게임창    GameRoom
-       setSize(1600,900);
-       setVisible(true);    // ㅇ
-       setResizable(false); // 사이즈 조정 [x]
+       add("MV",mv); //로그인창
+       add("MF",wr); //대기실창
+       add("GR",gr); 
+           
+       
+        setSize(1600,900);
+        setVisible(true);
+        setResizable(false);
         
         mv.b1.addActionListener(this); //로그인버튼
         wr.tf.addActionListener(this);
         wr.b7.addActionListener(this);
-        wr.b8.addActionListener(this); //로그아웃 버튼
         wr.p1.addMouseListener(this);
         nr.wnp.noButton.addActionListener(this);
         nr.wnp.okButton.addActionListener(this);
         gr.b2.addActionListener(this);
-        gr.tf1.addActionListener(this);
         
         setDefaultCloseOperation(EXIT_ON_CLOSE);
    }
@@ -157,7 +156,7 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
                     }
                  }
                  
-                 int rmpos = 1;//방정보를 넣을 방위치 선정
+                 rmpos = 1;//방정보를 넣을 방위치 선정
                  for(int i=0; i<wr.rmt.length ;i++)
                  {
                     if((wr.rmt[i].getText()).equals(" ")) break;//방위치 확인 (0~5)
@@ -177,16 +176,9 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
              nr.setVisible(false);// 서버로 값을 보내고 사라지게 만든다
             }
          }
-         else if(e.getSource()==wr.b8)
-  		 {
-  			try
-  			{
-  				out.write((Function.LOGOUT+"|\n").getBytes());
-  			}catch(Exception ex){}
-  		 }
-         else if(e.getSource()==gr.b2)
+         else if(e.getSource()==gr.b2) //시작하기
          {
-            
+            System.out.println(rmpos);
             try
              {
                 out.write((Function.GAMESTART+"|"+rname+"|"+rmpos+"\n").getBytes());
@@ -256,7 +248,7 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
                      rname=st.nextToken();
                      rmpos=Integer.parseInt(st.nextToken());
                      rmstate = st.nextToken();
-                     
+                     gr.la1.setText(myid); 
                      if(rmpos==1)
                      {
                         wr.rmt[rmpos-1].setText(rname);
@@ -272,15 +264,9 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
                   }
                   break;
                   
-                  case Function.MYROOMIN:
-                  {
-                     card.show(getContentPane(), "GR");
-                  }
-                  break;
-                  
                   case Function.WAITUPDATE:
                   {
-                     String id=st.nextToken();
+                  String id=st.nextToken();
                   String pos=st.nextToken();
                   String temp="";
                    for(int i=0;i<wr.model2.getRowCount();i++)
@@ -291,15 +277,14 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
                          wr.model2.setValueAt(pos, i, 2);
                          break;
                       }
-                   }
+                   }  
                   }
                   break;
                   
-                  //게임시작
-                  case Function.GAMESTART:
+                  case Function.PLAYUP:
                   {
-                     rmpos=Integer.parseInt(st.nextToken());
-                     if(rmpos==1)
+                	  rmpos=Integer.parseInt(st.nextToken());
+                	  if(rmpos==1)
                       {
                          wr.rmw[rmpos-1].setText("PLAYING");
                       }
@@ -307,13 +292,59 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
                       {
                          wr.rmw[rmpos-1].setText("PLAYING");
                       }
+                  }
+                  break;
+                  
+                  //게임시작
+                  case Function.GAMESTART:
+                  {
+                     rmpos=Integer.parseInt(st.nextToken());
+                     chat=st.nextToken();
                      score = 0;
+                     gr.ta.append(chat+"\n");
+                     gr.bar.setValue(gr.bar.getMaximum());
                      new Thread(gr).start(); //게임룸 쓰레드 시작
-                     gr.score.setText(score+"");
+                     //gr.score.setText(score+"");
                   }
                   break;
                    
                    
+                  case Function.ROOMADD:
+				    {
+				    	String id=st.nextToken();
+
+				    	for(int i=0;i<5;i++)
+				    	{
+				    		if(gr.sw[i]==false)
+				    		{
+				    			gr.sw[i]=true;
+				    			gr.idla[i].setText(id);
+				    			break;
+				    		}
+				    	}
+				    }
+				    break;
+                  
+                  case Function.MYROOMIN:
+				    {
+				    	card.show(getContentPane(), "GR");
+				    }
+				    break;
+                  
+                  case Function.ROOMUP:
+                  {
+                	  rmpos=Integer.parseInt(st.nextToken());
+                	  rmstate = st.nextToken();
+                	  
+                	  if(rmpos==1)
+                      {
+                		  wr.rmn[rmpos-1].setText(rmstate);
+                      }
+                      else if(rmpos==2)
+                      {
+                    	  wr.rmn[rmpos-1].setText(rmstate);
+                      }
+                  }
                    
                    
                    
@@ -330,34 +361,11 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
                   {
                      id=st.nextToken();
                      chat=st.nextToken();
-                     
-                      wr.ta.append(id+" "+chat+"\n");
-                      wr.bar.setValue(gr.bar.getMaximum());
+                     System.out.println("#####################"+id+chat);
+                      gr.ta.append(id+" "+chat+"\n");
+                      gr.bar.setValue(gr.bar.getMaximum());
                   }
                   break;
-                //로그아웃 시 대기방 처리
-                  case Function.LOGOUT:
-				    {
-				    	String id=st.nextToken();
-				    	String temp="";
-				    	for(int i=0;i<wr.model2.getRowCount();i++)
-				    	{
-				    		temp=wr.model2.getValueAt(i, 0).toString();
-				    		if(id.equals(temp))
-				    		{
-				    			wr.model2.removeRow(i);
-				    			break;
-				    		}
-				    	}
-				    }
-				  break;
-                  //로그아웃 본인
-                  case Function.MYLOGOUT:
-                  	{
-				    	dispose();
-				    	System.exit(0);
-                  	}
-				  break; 
                }
             }
          }catch(Exception ex){}
@@ -368,10 +376,59 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
    @Override
    public void mouseClicked(MouseEvent e) {
       // TODO Auto-generated method stub
-      if(e.getSource()==wr.p1 || e.getSource()==wr.p2 || e.getSource()==wr.p3 || e.getSource()==wr.p4 || e.getSource()==wr.p5 || e.getSource()==wr.p6)                     // 화면넘기기
+	   wr.rmt = new JLabel[]{
+               
+                  wr.latitle1,
+                  wr.latitle2
+               };
+         wr.rmn = new JLabel[]{
+                         wr.lanum1,
+                          wr.lanum2};
+         wr.rmw = new JLabel[]{wr.law1,
+                        wr.law2};
+         String s1 = wr.rmt[0].getText(); //방제 받아오기
+         String s2 = wr.rmt[1].getText();
+      if(e.getSource()==wr.p1)                     // 화면넘기기
          {
-            //if()
+            if(!s1.equals(" "))
+            {
+            	rmpos=1;
+	            try
+	            {
+	               System.out.println(s1 + "방위치가 어딘지? "+rmpos);
+	               out.write((Function.MYROOMIN+"|"+myid+"|"+s1+"|"+rmpos+"\n").getBytes());
+	            }catch(Exception ex) {} 
+            }
          }
+      else if(e.getSource()==wr.p2)                     // 화면넘기기
+      {
+         if(!s2.equals(" "))
+         {
+        	 rmpos=2;
+	         try
+	         {
+	        	System.out.println(s2+ "방위치가 어딘지? "+rmpos);
+	            out.write((Function.MYROOMIN+"|"+myid+"|"+s2+"|"+rmpos+"\n").getBytes());
+	         }catch(Exception ex) {} 
+         }
+      }
+      /*else if(e.getSource()==wr.p3)                     // 화면넘기기
+      {
+         if()
+      }
+      else if(e.getSource()==wr.p4)                     // 화면넘기기
+      {
+         if()
+      }
+      else if(e.getSource()==wr.p5)                     // 화면넘기기
+      {
+         if()
+      }
+      else if(e.getSource()==wr.p6)                     // 화면넘기기
+      {
+         if()
+      }*/
+      
    }
 
 
