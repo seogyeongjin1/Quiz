@@ -161,8 +161,9 @@ public class Server implements Runnable{
                   // 방만들기
                   case Function.MAKEROOM:
                   {
+
                      // 데이터 받기
-                     rn = st.nextToken(); //방제
+                	  rn = st.nextToken(); //방제
                       rmpos = Integer.parseInt(st.nextToken()); //방위치
                      Room room=new Room(
                            rn,
@@ -320,7 +321,8 @@ public class Server implements Runnable{
                         Room room=roomVc.elementAt(i);
                         
                         if(rn.equals(room.roomName))  //방제가 일치하는지 확인
-                        {   
+
+                        {	
                            for(int j=0;j<room.userVC.size();j++) // 방에 들어와있는 인원만큼 반복
                            {
                               Client user=room.userVC.elementAt(j); 
@@ -403,3 +405,4 @@ public class Server implements Runnable{
        
     }
 }
+

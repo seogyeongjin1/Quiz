@@ -61,7 +61,7 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
 
    @Override
       public void actionPerformed(ActionEvent e) 
-        {
+   {
          // TODO Auto-generated method stub
          
          if(e.getSource()==mv.b1) //로그인버튼
@@ -293,8 +293,9 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
                   
                   case Function.PLAYUP:
                   {
-                     rmpos=Integer.parseInt(st.nextToken());
-                     if(rmpos==1)
+                	  rmpos=Integer.parseInt(st.nextToken());
+                	  if(rmpos==1)
+
                       {
                          wr.rmw[rmpos-1].setText("PLAYING");
                       }
@@ -318,10 +319,10 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
                   }
                   break;
                    
-                   
+              
                   case Function.ROOMADD:
-                {
-                   String id=st.nextToken();
+				    {
+				    	String id=st.nextToken();
 
                    for(int i=0;i<5;i++)
                    {
@@ -352,7 +353,7 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
                       }
                       else if(rmpos==2)
                       {
-                         wr.rmn[rmpos-1].setText(rmstate);
+                    	  wr.rmn[rmpos-1].setText(rmstate);
                       }
                   }
                    
@@ -395,8 +396,8 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
                   //로그아웃 본인
                   case Function.MYLOGOUT:
                   {
-                        dispose();
-                        System.exit(0);
+                    	 dispose();
+                    	 System.exit(0);
                   }
                   break; 
                }
@@ -408,8 +409,9 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
 
    @Override
    public void mouseClicked(MouseEvent e) {
+
       // TODO Auto-generated method stub
-      wr.rmt = new JLabel[]{
+	   wr.rmt = new JLabel[]{
                
                   wr.latitle1,
                   wr.latitle2
@@ -424,25 +426,27 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
       if(e.getSource()==wr.p1)                     // 화면넘기기
          {
             if(!s1.equals(" "))
+
             {
-               rmpos=1;
-               try
-               {
-                  System.out.println(s1 + "방위치가 어딘지? "+rmpos);
-                  out.write((Function.MYROOMIN+"|"+myid+"|"+s1+"|"+rmpos+"\n").getBytes());
-               }catch(Exception ex) {} 
+            	rmpos=1;
+	            try
+	            {
+	               System.out.println(s1 + "방위치가 어딘지? "+rmpos);
+	               out.write((Function.MYROOMIN+"|"+myid+"|"+s1+"|"+rmpos+"\n").getBytes());
+	            }catch(Exception ex) {} 
+
             }
          }
       else if(e.getSource()==wr.p2)                     // 화면넘기기
       {
          if(!s2.equals(" "))
          {
-            rmpos=2;
-            try
-            {
-              System.out.println(s2+ "방위치가 어딘지? "+rmpos);
-               out.write((Function.MYROOMIN+"|"+myid+"|"+s2+"|"+rmpos+"\n").getBytes());
-            }catch(Exception ex) {} 
+        	 rmpos=2;
+	         try
+	         {
+	        	System.out.println(s2+ "방위치가 어딘지? "+rmpos);
+	            out.write((Function.MYROOMIN+"|"+myid+"|"+s2+"|"+rmpos+"\n").getBytes());
+	         }catch(Exception ex) {} 
          }
       }
       /*else if(e.getSource()==wr.p3)                     // 화면넘기기
@@ -497,3 +501,4 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
    }
       
 }
+
