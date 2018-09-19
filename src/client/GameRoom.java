@@ -16,9 +16,12 @@ public class GameRoom extends JPanel implements Runnable{
    JScrollBar bar;
    JPanel gp;
    Image back,munje;
-   int a;
+   int a,jumsu,i;
+   String dapin;
+   boolean[] sw=new boolean[5];
+   JLabel[] idla = {la1,la4,la7,la10,la13};
    GameRoom()
-   {
+   { 
       
       back=Toolkit.getDefaultToolkit().getImage("Image\\3.jpg");
       munje=Toolkit.getDefaultToolkit().getImage(mj.dapimg[0]);
@@ -26,6 +29,8 @@ public class GameRoom extends JPanel implements Runnable{
          b1=new JButton(new ImageIcon("Image\\ready.png"));
          b2=new JButton(new ImageIcon("Image\\start.png"));
          b3=new JButton(new ImageIcon("Image\\wait_exit2.png")); // 클래스 초기화
+         
+         //tf1.addActionListener(this);
       
             
          
@@ -34,31 +39,31 @@ public class GameRoom extends JPanel implements Runnable{
       la1.setBackground(Color.white);
       la2=new JLabel();
       la2.setOpaque(true);
-      la2.setBackground(Color.black);
+      la2.setBackground(Color.white);
      la4=new JLabel();
       la4.setOpaque(true);
-      la4.setBackground(Color.black);
+      la4.setBackground(Color.white);
       la5=new JLabel();
       la5.setOpaque(true);
-      la5.setBackground(Color.black);
+      la5.setBackground(Color.white);
       la7=new JLabel();
       la7.setOpaque(true);
-      la7.setBackground(Color.black);
+      la7.setBackground(Color.white);
       la8=new JLabel();
       la8.setOpaque(true);
-      la8.setBackground(Color.black);
+      la8.setBackground(Color.white);
       la10=new JLabel();
       la10.setOpaque(true);
-      la10.setBackground(Color.black);
+      la10.setBackground(Color.white);
       la11=new JLabel();
       la11.setOpaque(true);
-      la11.setBackground(Color.black);
+      la11.setBackground(Color.white);
       la13=new JLabel();
       la13.setOpaque(true);
-      la13.setBackground(Color.black);
+      la13.setBackground(Color.white);
       la14=new JLabel();
       la14.setOpaque(true);
-      la14.setBackground(Color.black);
+      la14.setBackground(Color.white);
       po1=new JLabel(new ImageIcon("Image\\po1.png"));
       po1.setOpaque(true);
       po1.setBackground(Color.black);
@@ -232,7 +237,7 @@ public class GameRoom extends JPanel implements Runnable{
    {
       // TODO Auto-generated method stub
       a=0;
-      int i=0;
+      i=0;
       boolean check = false; //true면 문제에 관한거(문제시간, 문제 변경); false면 (답시간, 답사진변경)
 
       while(true)
@@ -244,7 +249,6 @@ public class GameRoom extends JPanel implements Runnable{
                Thread.sleep(100);
             else         // 답 관한 쓰레드
                Thread.sleep(20);
-            
             
          }catch(Exception ex) {}
          
@@ -270,10 +274,26 @@ public class GameRoom extends JPanel implements Runnable{
                // 서버 점수 전송 
                break;
             }
-
          }
          a++;
+      }
+   }
+
+
+   
+   public void actionPerformed(ActionEvent e) {
+      // TODO Auto-generated method stub
+      if(e.getSource()==tf1)
+      {
+         dapin=tf1.getText();
+         tf1.setText("");
+         tf1.requestFocus();
          
+         if(dapin.equals(mj.dap[i]))
+         {
+            jumsu+=(100-a);
+            score.setText(jumsu+"");
+         }
       }
    }
 }
