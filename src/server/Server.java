@@ -360,7 +360,7 @@ public class Server implements Runnable{
              }
           }catch(Exception ex){}
        }
-       /*
+       /* 
         *   서버 ==> 클라이언트 전송 메세지 
         */
        //  전체 전송하는 메세지
