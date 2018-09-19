@@ -43,6 +43,7 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
         mv.b1.addActionListener(this); //로그인버튼
         wr.tf.addActionListener(this);
         wr.b7.addActionListener(this);
+        wr.b8.addActionListener(this);
         wr.p1.addMouseListener(this);
         nr.wnp.noButton.addActionListener(this);
         nr.wnp.okButton.addActionListener(this);
@@ -59,7 +60,8 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
    }
 
    @Override
-      public void actionPerformed(ActionEvent e) {
+      public void actionPerformed(ActionEvent e) 
+        {
          // TODO Auto-generated method stub
          
          if(e.getSource()==mv.b1) //로그인버튼
@@ -189,6 +191,14 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
          {
             
          }*/
+         
+         if(e.getSource()==wr.b8)
+         {
+           try
+           {
+              out.write((Function.LOGOUT+"|\n").getBytes());
+           }catch(Exception ex){}
+         }
       }
        
       public void run()
@@ -283,8 +293,8 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
                   
                   case Function.PLAYUP:
                   {
-                	  rmpos=Integer.parseInt(st.nextToken());
-                	  if(rmpos==1)
+                     rmpos=Integer.parseInt(st.nextToken());
+                     if(rmpos==1)
                       {
                          wr.rmw[rmpos-1].setText("PLAYING");
                       }
@@ -310,39 +320,39 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
                    
                    
                   case Function.ROOMADD:
-				    {
-				    	String id=st.nextToken();
+                {
+                   String id=st.nextToken();
 
-				    	for(int i=0;i<5;i++)
-				    	{
-				    		if(gr.sw[i]==false)
-				    		{
-				    			gr.sw[i]=true;
-				    			gr.idla[i].setText(id);
-				    			break;
-				    		}
-				    	}
-				    }
-				    break;
+                   for(int i=0;i<5;i++)
+                   {
+                      if(gr.sw[i]==false)
+                      {
+                         gr.sw[i]=true;
+                         gr.idla[i].setText(id);
+                         break;
+                      }
+                   }
+                }
+                break;
                   
                   case Function.MYROOMIN:
-				    {
-				    	card.show(getContentPane(), "GR");
-				    }
-				    break;
+                {
+                   card.show(getContentPane(), "GR");
+                }
+                break;
                   
                   case Function.ROOMUP:
                   {
-                	  rmpos=Integer.parseInt(st.nextToken());
-                	  rmstate = st.nextToken();
-                	  
-                	  if(rmpos==1)
+                     rmpos=Integer.parseInt(st.nextToken());
+                     rmstate = st.nextToken();
+                     
+                     if(rmpos==1)
                       {
-                		  wr.rmn[rmpos-1].setText(rmstate);
+                        wr.rmn[rmpos-1].setText(rmstate);
                       }
                       else if(rmpos==2)
                       {
-                    	  wr.rmn[rmpos-1].setText(rmstate);
+                         wr.rmn[rmpos-1].setText(rmstate);
                       }
                   }
                    
@@ -366,6 +376,29 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
                       gr.bar.setValue(gr.bar.getMaximum());
                   }
                   break;
+                  
+                  case Function.LOGOUT:
+                  {
+                     String id=st.nextToken();
+                     String temp="";
+                     for(int i=0;i<wr.model2.getRowCount();i++)
+                     {
+                        temp=wr.model2.getValueAt(i, 0).toString();
+                        if(id.equals(temp))
+                        {
+                           wr.model2.removeRow(i);
+                           break;
+                        }
+                     }
+                  }
+                break;
+                  //로그아웃 본인
+                  case Function.MYLOGOUT:
+                  {
+                        dispose();
+                        System.exit(0);
+                  }
+                  break; 
                }
             }
          }catch(Exception ex){}
@@ -376,7 +409,7 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
    @Override
    public void mouseClicked(MouseEvent e) {
       // TODO Auto-generated method stub
-	   wr.rmt = new JLabel[]{
+      wr.rmt = new JLabel[]{
                
                   wr.latitle1,
                   wr.latitle2
@@ -392,24 +425,24 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
          {
             if(!s1.equals(" "))
             {
-            	rmpos=1;
-	            try
-	            {
-	               System.out.println(s1 + "방위치가 어딘지? "+rmpos);
-	               out.write((Function.MYROOMIN+"|"+myid+"|"+s1+"|"+rmpos+"\n").getBytes());
-	            }catch(Exception ex) {} 
+               rmpos=1;
+               try
+               {
+                  System.out.println(s1 + "방위치가 어딘지? "+rmpos);
+                  out.write((Function.MYROOMIN+"|"+myid+"|"+s1+"|"+rmpos+"\n").getBytes());
+               }catch(Exception ex) {} 
             }
          }
       else if(e.getSource()==wr.p2)                     // 화면넘기기
       {
          if(!s2.equals(" "))
          {
-        	 rmpos=2;
-	         try
-	         {
-	        	System.out.println(s2+ "방위치가 어딘지? "+rmpos);
-	            out.write((Function.MYROOMIN+"|"+myid+"|"+s2+"|"+rmpos+"\n").getBytes());
-	         }catch(Exception ex) {} 
+            rmpos=2;
+            try
+            {
+              System.out.println(s2+ "방위치가 어딘지? "+rmpos);
+               out.write((Function.MYROOMIN+"|"+myid+"|"+s2+"|"+rmpos+"\n").getBytes());
+            }catch(Exception ex) {} 
          }
       }
       /*else if(e.getSource()==wr.p3)                     // 화면넘기기
@@ -464,4 +497,3 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
    }
       
 }
-
