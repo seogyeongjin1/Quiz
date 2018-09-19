@@ -354,16 +354,6 @@ public class Server implements Runnable{
           }catch(Exception ex){}
        }
        
-       public void gamemessageAll(String msg)
-       {
-          try 
-          {
-             for(Client cr:Room.userVC)
-             {
-            	 cr.messageTo(msg);
-             }
-          }catch(Exception ex){}
-       }
        //  개인적 전송하는 메세지 
        public void messageTo(String msg)
        {
