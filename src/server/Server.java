@@ -188,15 +188,19 @@ public class Server implements Runnable{
                      // 2/6
                      // 본인만 패널교체
                      messageTo(Function.MYROOMIN+""/*"|"
-                           +id+"|"+room.roomName+"/"+room.current*/);   
+                           +id+"|"+room.roomName+"/"+room.current*/);
+                     
+                     messageTo(Function.ROOMADD+"|"+id);
                   }
                   break;
 
                   
                   case Function.MYROOMIN:
                   {
-                    String id=st.nextToken();  //아이디 
-                     String rn=st.nextToken();  //방제목
+
+                	 id=st.nextToken();  //아이디 
+                     rn=st.nextToken();  //방제목
+
                      int roompos=Integer.parseInt(st.nextToken()); //방위치
                      for(int i=0;i<roomVc.size();i++)  //만들어진 방만큼 반복
                      {
@@ -204,7 +208,7 @@ public class Server implements Runnable{
                         if(rn.equals(room.roomName))  //보내온 방제랑 일치하는지 확인
                         {
                            //방제가 일치
-                           
+
                            
                            room.current++;  //방에 있는 현재원
                            pos="게임준비중"; 
@@ -212,34 +216,36 @@ public class Server implements Runnable{
                            for(int j=0;j<room.userVC.size();j++) //방에 있는 인원만큼 반복
                            {
                               Client user=room.userVC.elementAt(j);
-                              user.messageTo(Function.ROOMADD+"|"  //내가 확보한 위치 상대방에게 전달하기
-                                 +id);
                               
+                              user.messageTo(Function.ROOMADD+"|"+id);//내가 확보한 위치 상대방에게 전달하기
                               
-                              user.messageTo(Function.GAMECHAT  //입장메세지
-                                   +"|[알림 ☞]"+id+" |님이 입장하셨습니다");
+
+                              System.out.println(id + "가 입장했다고 게임채팅창에 출력");
+                              user.messageTo(Function.GAMECHAT +"|"+"[알림 ☞]  " + id + "|"+"님이 입장하셨습니다");//입장메세지
                            }
+                           
                            // 방에 들어가는 사람 처리
-                           room.userVC.add(this);   //들어온 방,유저정보에 내 정보 추가
-                           messageTo(Function.MYROOMIN+""/*+"|"   //카드레이아웃 교체
+                           room.userVC.add(this);  //들어온 방,유저정보에 내 정보 추가
+                           messageTo(Function.MYROOMIN+""
+                        		   /*+"|"   //카드레이아웃 교체
                                  +id+"|"+name+"|"
                                  +room.roomName*/);
                            
+                           System.out.println(id+"가 입장했다");
+
                            for(int k=0;k<room.userVC.size();k++) //방에 접속한 유저 수만큼 반복
                            {
                               Client user=room.userVC.elementAt(k); 
-                              /*if(!id.equals(user.id)) 
-                              {*/
-                                messageTo(Function.ROOMADD+"|" //내 아이디와 유저 아이디가 다를경우 ROOMADD실행
-                                 +user.id);
-                              
+                              	//System.out.println("bbb한테 유저목록을 보내줄거다");
+                                messageTo(Function.ROOMADD+"|" 
+                                 +user.id);//내 아이디와 유저 아이디가 다를경우 ROOMADD실행
                            }
-                           
+
                            // 대기실에 있는 사람에게 내 정보 뿌리기
                            messageAll(Function.WAITUPDATE+"|"
                                    +id+"|"+pos);
                            
-                           
+                           // 현재원 수정
                            messageAll(Function.ROOMUP+"|"+roompos+"|"
                                    +room.current+"/"+room.maxcount);
                            
@@ -249,67 +255,6 @@ public class Server implements Runnable{
                      }
                   }
                   break;
-                  /*case Function.ROOMOUT:
-                  {
-                     
-                         방찾는다
-                            현재인원 증가
-                            위치 변경
-                         ==========
-                            방에 있는 사람 
-                           => 방에 들어가는 사람의 정보 전송
-                           => 입장메세지 
-                            방에 들어가는 사람 처리
-                           => 방으로 변경
-                           => 방에 있는 사람의 모든 정보를 받는다 
-                            대기실 처리
-                           => 1) 인원 (table1)
-                              2) 위치 (table2)
-                              
-                            강퇴 , 초대 , 게임 
-                      
-                     String rn=st.nextToken();
-                     for(int i=0;i<roomVc.size();i++)
-                     {
-                        Room room=roomVc.elementAt(i);
-                        if(rn.equals(room.roomName))
-                        {
-                           room.current--;
-                           pos="대기실";
-                           // 방에 있는 사람 처리
-                           for(int j=0;j<room.userVC.size();j++)
-                           {
-                              Client user=room.userVC.elementAt(j);
-                              user.messageTo(Function.ROOMOUT+"|"+id+"|"+name);
-                              user.messageTo(Function.GAMECHAT
-                                    +"|[알림 ☞]"+name+"님이 퇴장하셨습니다");
-                           }
-                           // 방에 들어가는 사람 처리
-                           //room.userVc.addElement(this);
-                           messageTo(Function.MYROOMOUT+"|");
-                           for(int k=0;k<room.userVC.size();k++)
-                           {
-                              Client user=room.userVC.elementAt(k);
-                              if(id.equals(user.id))
-                              {
-                                 room.userVC.removeElementAt(k);
-                                 break;
-                              }
-                           }
-                           // 대기실 
-                           messageAll(Function.WAITUPDATE+"|"
-                                 +id+"|"+pos+"|"+room.roomName+"|"
-                                 +room.current+"|"+room.maxcount);
-                           if(room.current<1)
-                           {
-                              roomVc.removeElementAt(i);
-                              break;
-                           }
-                        }
-                     }
-                  }
-                  break;*/
-                  
                   
                   case Function.GAMESTART: //게임시작
                   {
@@ -353,9 +298,23 @@ public class Server implements Runnable{
                   
                   case Function.GAMECHAT:
                   {
-                     String id = st.nextToken();
+                     id = st.nextToken();
                      String chat=st.nextToken();
-                     messageAll(Function.GAMECHAT+"|["+id+"]| "+chat);
+                     System.out.println(id);
+                     
+                     for(int i=0;i<roomVc.size();i++)
+                     {                        
+                        Room room=roomVc.elementAt(i);
+                        //System.out.println(room.roomName);
+                        if(rn.equals(room.roomName))  //방제가 일치하는지 확인
+                        {	
+                           for(int j=0;j<room.userVC.size();j++) // 방에 들어와있는 인원만큼 반복
+                           {
+                              Client user=room.userVC.elementAt(j); 
+                              user.messageTo(Function.GAMECHAT+"|["+id+"]| "+chat);
+                           }
+                        }                     
+                     }
                   }
                   break;
                   
@@ -394,6 +353,7 @@ public class Server implements Runnable{
              }
           }catch(Exception ex){}
        }
+       
        //  개인적 전송하는 메세지 
        public void messageTo(String msg)
        {

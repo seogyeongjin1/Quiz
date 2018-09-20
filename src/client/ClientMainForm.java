@@ -33,7 +33,7 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
        
        add("MV",mv); //로그인창
        add("MF",wr); //대기실창
-       add("GR",gr); 
+       add("GR",gr); //게임룸
            
        
         setSize(1600,900);
@@ -73,7 +73,7 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
                
             try
             {
-               s=new Socket("211.238.142.63", 7777);
+               s=new Socket("211.238.142.64", 7777);
 
                in=new BufferedReader(new InputStreamReader(s.getInputStream()));
                   // byte ==> 2byte
@@ -86,6 +86,7 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
          
          if(e.getSource()==wr.tf)
          {
+        	 //공백일때 다시쳐라
             chat=wr.tf.getText();
             if(chat.trim().length()<1)
             {
@@ -190,16 +191,17 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
          
          else if(e.getSource()==gr.tf)
          {
-            chat=gr.tf.getText();
+        	 chat=gr.tf.getText();
              if(chat.trim().length()<1)
              {
                 gr.tf.setText("");
                 return;
              }
-            try
+        	 try
              {
-               out.write((Function.GAMECHAT+"|"+myid+"|"+chat+"\n").getBytes());
-               gr.tf.setText("");
+        		 out.write((Function.GAMECHAT+"|"+myid+"|"+chat+"\n").getBytes());
+        		 gr.tf.setText("");
+
                  gr.tf.requestFocus();
              }catch(Exception ex){}
          }
@@ -332,10 +334,11 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
                   }
                   break;
                    
-                   
+              
                   case Function.ROOMADD:
-                {
-                   id=st.nextToken();
+				    {
+				    	id=st.nextToken();
+
 
                    for(int i=0;i<5;i++)
                    {
@@ -421,9 +424,12 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
 
 
    @Override
-   public void mouseClicked(MouseEvent e) {
+
+   public void mouseClicked(MouseEvent e) 
+   {
+
       // TODO Auto-generated method stub
-      wr.rmt = new JLabel[]{
+	   wr.rmt = new JLabel[]{
                
                   wr.latitle1,
                   wr.latitle2
@@ -435,6 +441,7 @@ public class ClientMainForm extends JFrame implements ActionListener,Runnable,Mo
                         wr.law2};
          String s1 = wr.rmt[0].getText(); //방제 받아오기
          String s2 = wr.rmt[1].getText();
+         
       if(e.getSource()==wr.p1)                     // 화면넘기기
          {
             if(!s1.equals(" "))
